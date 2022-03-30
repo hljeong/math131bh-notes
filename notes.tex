@@ -1,0 +1,118 @@
+\documentclass{notes}
+
+\class{MATH 131BH (Real Analysis)}
+
+\notusingsubsection
+
+\begin{document}
+  \section{3.28 Monday Week 1}
+  
+  \section{3.30 Wednesday Week 1}
+  
+  \textbf{Recall:} $f \colon X \to Y$ is said to be \textbf{continuous at $x \in X$} if $\forall \, \varepsilon > 0 \, \exists \, \delta > 0 \, \forall \, z \in x: \rho_X(x, z) < \delta \Rightarrow \rho(f(z), f(x)) < \varepsilon$.
+
+  Alternatives: 
+  \begin{itemize}
+    \item $f(B_X(x, \delta)) \subseteq B_Y(f(x), \varepsilon)$
+  \end{itemize}
+  
+  \begin{defn}
+    A function $f \colon X \to Y$ \textbf{has limit $y \in Y$ at $x \in X$}, notation $\lim_{z \to x} f(z) = y$, if 
+    \[
+      \forall \, \varepsilon \, \exists \, \delta > 0 \, \forall \, z \in X: 0 < \rho_X(x, z) < \delta \Rightarrow \rho_Y(f(z), y) < \varepsilon.
+    \]
+    
+    Alternatives: 
+    \begin{itemize}
+      \item $f(B_X(x, \delta) \setminus \left \{ x \right \}) \subseteq B_Y(y, \varepsilon))$; 
+
+      \item $\forall \, \left \{ x_n \right \}_{n \in \mathbb N} \in X^\mathbb N: (\forall \, n \in \mathbb N: x_n \neq x) \land x_n \to x \Rightarrow f(x_n) \to y$; 
+        
+      \item $g(z) := \begin{cases}
+        f(z) & z \neq x \\ 
+        y & z = x
+      \end{cases}$ is continuous at $x$.
+    \end{itemize}
+  \end{defn}
+  
+  \begin{defn}
+    $f$ has a \textbf{removable discontinuity} at $x$ if $\lim_{z \to x} f(z)$ exists but $\neq f(x)$.
+  \end{defn}
+  
+  \begin{defn}
+    Let $A \subseteq X$ be nonempty, $x \in \overline A$ be not an isolated point.
+    Then $\lim_{z \to x} f(z) = \lim_{z \to x} f_A(z)$ where $f_A$ is the restriction of $f$ to $A$.
+  \end{defn}
+  
+  \begin{defn}
+    For $f \colon \mathbb R \to \mathbb R$, let $x \in \overline{\operatorname{Dom}(f)}$ be such that $\operatorname{Dom}(f) \cap (x, \infty) \neq \varnothing$ and $\operatorname{Dom}(f) \cap (-\infty, x) \neq \varnothing$.
+    Then $\lim_{z \to x^+} f(z) := \lim_{z \to x, z \in \operatorname{Dom}(f) \cap (x, \infty)} f(z) \land \lim_{z \to x^-} f(z) := \lim_{z \to x, z \in \operatorname{Dom}(f) \cap (-\infty, x)} f(z)$ are the \textbf{right / left limits of $f$ at $x$}.
+
+    Alternate notation: $f(x^+)$, $f(x^-)$.
+  \end{defn}
+  
+  \newpage
+  
+  \begin{eg}
+    \begin{equation}
+      f(x) = \begin{cases}
+        1 & x \in \mathbb Q \\ 
+        0 & x \not \in \mathbb Q
+      \end{cases}
+    \end{equation}
+    has no right or left limits.
+  \end{eg}
+  
+  \begin{eg}
+    \begin{equation}
+      f(x) = \begin{cases}
+        \frac{1}{n + 1} & x = q_n \text{ where $\left \{ q_n \right \}_{n \in \mathbb N}$ enumerates $\mathbb Q$} \\ 
+        0 & x \not \in \mathbb Q.
+      \end{cases}
+    \end{equation}
+    Then $\forall \, x \not \in \mathbb Q: \lim_{z \to x} f(z) = 0$ so $f$ is continuous on $\mathbb R \setminus \mathbb Q$, and $\forall \, x \in \mathbb Q: \lim_{z \to x} f(z) = 0$ but $f$ is not continuous at $x$.
+  \end{eg}
+  
+  \begin{lem}
+    \[
+      \forall \, r > 0 \, \forall \, \varepsilon > 0: \left \{ x \in \mathbb R : \left | x \right | < r \land \left | f(x) \right | > \varepsilon \right \} \text{finite} \Rightarrow \forall \, x \in \mathbb R: \lim_{z \to x} f(z) = 0.
+    \]
+  \end{lem}
+  
+  \begin{defn}
+    A function $f \colon \mathbb R \to \mathbb R$ has a \textbf{discontinuity of }
+    \begin{itemize}
+      \item \textbf{first kind} at $x$ if $f(x^+)$ and $f(x^-)$ exist but are not both equal to $f(x)$; 
+
+      \item \textbf{second kind} at $x$ if one or both of $f(x^+)$ and $f(x^-)$ don't exist.
+    \end{itemize}
+  \end{defn}
+  
+  \begin{eg}
+    \begin{equation}
+      f(x) := \begin{cases}
+        (-1)^n & x = \frac{1}{n + 1}, n \in \mathbb N \\ 
+        \text{linear} & x \in (0, \infty) \setminus \left \{ \frac{1}{n + 1} : n \in \mathbb N \right \} \\ 
+        0 & x \leq 0.
+      \end{cases}
+    \end{equation}
+    
+    This function has a discontinuity of second kind at 0.
+  \end{eg}
+  
+  \begin{lem}
+    Let $f \colon \mathbb R \to \mathbb R$ ($\operatorname{Dom}(f) = \mathbb R  $) be monotone.
+    Then $\forall \, x \in \mathbb R: \text{$f(x^+), f(x^-)$ exist}$ and so $f$ has no discontinuities of second kind.
+  \end{lem}
+  
+  \begin{prf}
+    Let $x \in \mathbb R$ and assume $f$ is nondecreasing.
+    We claim that $\lim_{z \to x^+} f(z) = \inf \left \{ f(z) : z > x \right \}=: L$.
+
+    Indeed, $\forall \, z > x: f(z) \geq f(x)$, so $L \geq f(x)$ and so $L \in \mathbb R$.
+    Then $(\forall \, z > x: L \leq f(z)) \land (\forall \, \varepsilon > 0 \, \exists \, z_\varepsilon  > x: f(z_\varepsilon) < L + \varepsilon)$.
+    Let $\delta := z_\varepsilon - x$.
+    Then $\forall \, z \in (x, x + \delta): f(z) \leq f(z_\varepsilon) < L + \varepsilon$.
+    Then $\forall \, z \in (x, x + \delta): L \leq f(z) < L + \varepsilon$ and therefore $\left | f(z) - L \right | < \varepsilon$.
+  \end{prf}
+\end{document}
