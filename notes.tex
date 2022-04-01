@@ -115,4 +115,133 @@
     Then $\forall \, z \in (x, x + \delta): f(z) \leq f(z_\varepsilon) < L + \varepsilon$.
     Then $\forall \, z \in (x, x + \delta): L \leq f(z) < L + \varepsilon$ and therefore $\left | f(z) - L \right | < \varepsilon$.
   \end{prf}
+  
+  \section{3.31 Thursday Week 1}
+  
+  \underline{\boldmath \bfseries Limits of functions}
+  
+  Last time we showed that monotone functions have no discontinuities of second time.
+
+  \begin{lem}
+    Let $f \colon \mathbb R \to \mathbb R$ be monotone.
+    Then $\left \{ x \in \mathbb R : f(x^+) \neq f(x^-) \right \}$ is countable.
+  \end{lem}
+  
+  \begin{prf}
+    Pick $k, - \in \mathbb N$ and let $A_{m, k} := \left \{ x \in [-m, m] : \left | f(x^+) - f(x^-) \right | > \frac{1}{k + 1} \right \}$.
+    We claim that $A_{m, k}$ is finite.
+    
+    Let $x_{0} < x_{1} < \cdots x_n$ be such that $\forall \, i \leq n: x_i \in A_{k, m}$.
+    Assume (without loss of generality) that $f$ is non-decreasing.
+    Then 
+    \begin{align}
+      f(m + 1) &\geq f(x_n^+) = f(x_0^+) + \sum_{i = 1}^n \left ( f(x_i^+) - f(x_{i - 1}^+) \right ) \nonumber \\ 
+      &\geq f(m - 1) + \sum_{i = 1}^n \left ( f(x_i^+) - f(x_i^-) \right ) \nonumber \\ 
+      &\geq f(-m + 1) + \frac{n}{k + 1}.
+    \end{align}
+    Then $n \leq (k + 1)$.
+    Since $\left \{ x \in \mathbb R : f(x^+) \neq f(x^-) \right \} = \bigcup_{k \in \mathbb N} \bigcup_{m \in \mathbb N} A_{k, m}$, we are done.
+  \end{prf}
+  
+  {\boldmath \bfseries  Q:} Can these be generalized to other functions?
+
+  \begin{defn}
+    A {\boldmath \bfseries partition} $\Pi$ of an interval $[a, b]$ is a sequence $\left \{ t_i \right \}_{i = 0}^n$ such that 
+    \[
+      a = t_0 < t_{1} < \cdots < t_{n - 1} < t_n = b.
+    \]
+  \end{defn}
+  
+  \begin{defn}
+    Given $f \colon [a, b] \to \mathbb R$, its {\boldmath \bfseries total variation} on $[a, b]$
+    \[
+      V(f, [a, b]) := \sup_{\Pi = \left \{ t_i \right \}_{i = 0}^n} \sum_{i = 1}^n \left | f(t_i) - f(t_{i - 1}) \right | 
+    \]
+    where the supremum if over the partitions of $[a, b]$.
+  \end{defn}
+  
+  \begin{defn}
+    $f$ is said to be of {\boldmath \bfseries bounded variation} on $[a, b]$ if $V(f, [a, b]) < \infty$.
+  \end{defn}
+  
+  \begin{lem}
+    If $f \colon \mathbb R \to \mathbb R$ is of bounded variation on $[-m, m]$ for all $m \in \mathbb N$, then $f$ has only discontinuities of first kind and the set $\left \{ x \in \mathbb R : f(x^+) \neq f(x^-) \right \}$ is countable.
+  \end{lem}
+  
+  \newpage
+  
+  \begin{thm}[Jordan decomposition (1881)]
+    Let $f \colon [a, b] \to \mathbb R$ obey $V(f, [a, b]) < \infty$.
+    Then $\exists \, h, g \colon [a, b] \to \mathbb R$ nondecreasing such that $\forall \, t \in [a, b]: f(t) = h(t) - g(t)$.
+  \end{thm}
+  
+  \begin{prf}
+    Define $h(t) := V(f, [a, t])$ and $g(t) := V(f, [a, t]) - f(t)$.
+    Note that $h(t) - g(t) = f(t)$.
+
+    We need to show that $h$ and $g$ are nondecreasing.
+    
+    Let $a \leq t < t' \leq b$.
+    Then for any partition $\Pi$ of $[a, t]$.
+    $\Pi' = \Pi \cup \left \{ t' \right \}$ is a partition of $[a, t']$.
+    Then 
+    \begin{equation}
+      V(f, [0, t']) \geq \sum_{i = 1}^m \left | f(t_i) - f(t_{i - 1}) \right | + \left | f(t') - f(t) \right |.
+    \end{equation}
+    Taking supremum over $\Pi$ gives 
+    \begin{equation}
+      V(f, [a, t']) \geq V(f, [a, t]) + \left | f(t') - f(t) \right |.
+    \end{equation}
+    Note that $\left | f(t') - f(t) \right | \geq 0$ and $\left | f(t') - f(t) \right | \geq f(t') - f(t)$.
+    Then $h(t') \geq h(t)$ and $g(t') \geq g(t)$.
+  \end{prf}
+  
+  \strut
+  
+  The representation of $f = h - g$ is called a Jordan decomposition.
+  This is not unique because a nondecreasing function can be added to both $h$ and $g$.
+  
+  However, there is a minimal decomposition $f = h_{0} - g_{0}$ such that $g_0(a) = 0$ such that for any other Jordan decomposition $f = h - g$ we have $h - h_0$, $g - g_0$ nondecreasing.
+  This is then \textit{the} Jordan decomposition.
+  
+  \strut
+  
+  \underline{{\boldmath \bfseries Rectifiability of curves}}
+  
+  \begin{defn}
+    Let $(X, \rho)$ be a metric space.
+    A curve $\mathcal C$ is $\operatorname{Ran}(f)$ for an $f \colon \mathbb R \to X$ continuous such that $\operatorname{Dom}(f)$ is nonempty and connected.
+    This $f$ is called a {\boldmath \bfseries parametrization} of $\mathcal C$.
+  \end{defn}
+  
+  \begin{defn}
+    Assuming $\operatorname{Dom}(f) = [a, b]$, the {\boldmath \bfseries length of $\mathcal C$} is 
+    \[
+      \ell(\mathcal C) := \sup_{\Pi = \left \{ t_i \right \}_{i = 1}^n} \sum_{i = 1}^n \rho(f(t_{i - 1}), f(t_i)).
+    \]
+  \end{defn}
+  
+  \begin{defn}
+    A curve is {\boldmath \bfseries rectifiable} if $\ell(\mathcal C) < \infty$.
+  \end{defn}
+  
+  \newpage
+  
+  \begin{defn}
+    Let $(X, \rho)$ be a metric space and $f \colon X \to \mathbb R$.
+    Then 
+    \[
+      \limsup_{z \to x} f(z) := \inf_{\delta > 0} \sup_{z \in B(x, \delta) \setminus \left \{ x \right \}} f(z)
+    \]
+    and 
+    \[
+      \liminf_{z \to x} f(z) := \sup_{\delta > 0} \inf_{z \in B(x, \delta) \setminus \left \{ x \right \}} f(z).
+    \]
+  \end{defn}
+  
+  \begin{lem}
+    \[
+      \lim_{z \to x} f(z) \text{exists in $\mathbb R$} \Leftrightarrow \limsup_{z \to x} f(z) = \liminf_{z \to x} f(z) \in \mathbb R.
+    \]
+  \end{lem}
 \end{document}
