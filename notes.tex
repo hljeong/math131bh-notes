@@ -11,7 +11,7 @@
   
   \underline{{\boldmath \bfseries Limits of functions}}
   
-  \textbf{Recall:} $f \colon X \to Y$ is said to be {\boldmath \bfseries continuous at $x \in X$} if 
+  {\boldmath \bfseries Recall:} $f \colon X \to Y$ is said to be {\boldmath \bfseries continuous at $x \in X$} if 
   \[
     \forall \, \varepsilon > 0 \, \exists \, \delta > 0 \, \forall \, z \in x: \rho_X(x, z) < \delta \Rightarrow \rho(f(z), f(x)) < \varepsilon.
   \]
@@ -264,4 +264,86 @@
       \lim_{z \to x} f(z) \text{ exists in $\mathbb R$} \Leftrightarrow \limsup_{z \to x} f(z) = \liminf_{z \to x} f(z) \in \mathbb R.
     \]
   \end{lem}
+  
+  \section{4.1 Friday Week 1: Discussion}
+  
+  \begin{defn}
+    Let $(X, \rho_X)$, $(Y, \rho_Y)$ be metric spaces, $E \subseteq X$, $f \colon E \to Y$, and $x \in \overline E$.
+    Then $\lim_{t \to x} f(t) = \alpha$ is defined by 
+    \[
+      \forall \, \varepsilon > 0 \, \exists \, \delta > 0: \forall \, x \in E \land 0 < \rho_X(t, x) < \delta \Rightarrow \rho_Y(f(t), \alpha) < \varepsilon.
+    \]
+    
+    Equivalently, 
+    \[ 
+      \forall \, \left \{ t_n \right \}_{n \in \mathbb N} \in (E \setminus \left \{ x \right \})^\mathbb N: t_n \to x \Rightarrow f(t_n) \to \alpha.
+    \]
+  \end{defn}
+  
+  \begin{note}
+    $f$ need not be defined at $x$.
+  \end{note}
+  
+  \begin{rmk}
+    \[
+      \limsup_{t \to x} f(t) := \inf_{\delta > 0} \sup_{t \in B(x, \delta) \setminus \left \{ x \right \}} f(t) = \lim_{\delta \to 0} \sup_{t \in B(x, \delta) \setminus \left \{ x \right \}} f(t).
+    \]
+    $\liminf$ is similarly defined.
+  \end{rmk}
+  
+  \begin{rmk}
+    \[
+      \limsup = \liminf \Rightarrow \text{$\lim$ exists.}
+    \]
+  \end{rmk}
+  
+  \underline{{\boldmath \bfseries Discontiuities}}
+  
+  \begin{defn}
+    Let $f \colon (a, b) \to \mathbb R$ be not continuous at $x$. Then $f$ has a {\boldmath \bfseries discontinuity of first kind} at $x$ if $f(x+)$ and $f(x-)$ both exist.
+    Otherwise it is of {\boldmath \bfseries second kind}.
+  \end{defn}
+  
+  \newpage
+  
+  \begin{rmk}
+    Discontinuities of the first kind are also known as {\boldmath \bfseries simple discontinuities}.
+    The cases include 
+    \begin{itemize}
+      \item $f(x+) = f(x-) \neq f(x)$: {\boldmath \bfseries removable discontinuity}, and  
+
+      \item $f(x+) \neq f(x-)$: {\boldmath \bfseries jump discontinuity}.
+    \end{itemize}
+  \end{rmk}
+  
+  \begin{eg}
+    \begin{equation}
+      f(x) = \begin{cases}
+        \sin \left ( \frac{1}{x} \right ) & x \neq 0 \\ 
+        0 & x = 0
+      \end{cases}
+    \end{equation}
+    has a discontinuity of second kind at 0.
+  \end{eg}
+  
+  \begin{eg}
+    \begin{equation}
+      f(x) = \begin{cases}
+        \frac{1}{q} & x = \frac{p}{q} \in \mathbb Q \\ 
+        0 & x \in \mathbb R \setminus \mathbb Q
+      \end{cases}
+    \end{equation}
+    is continuous on $\mathbb R \setminus \mathbb Q$ and has discontinuities of first kind (removable) at every point in $\mathbb Q$.
+  \end{eg}
+  
+  {\boldmath \bfseries Recall:} A monotone function has no discontinuity of second kind and has at most countably many discontinuities of first kind.
+  One can deduce this from the fact that the real line is a union of countably many open intervals (indexed by rationals).
+  
+  \begin{defn}
+    A function $f \colon (a, b) \to \mathbb R$ is convex if 
+    \[
+      \forall \, x, y \in (a, b): x \leq y \Rightarrow (\forall \, \lambda \in [0, 1]: f(\lambda x + (1 - \lambda) y)) \leq \lambda f(x) + (1 - \lambda) f(y).
+    \]
+    In words, this means that for any interval, the secant line is above the graph.
+  \end{defn}
 \end{document}
