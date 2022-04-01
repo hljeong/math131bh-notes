@@ -5,16 +5,31 @@
 \notusingsubsection
 
 \begin{document}
-  \section{3.28 Monday Week 1}
+  \section{3.28 Monday Week 1: Intro to the course. Review of material covered in 131AH: foundations (definition and constructions of naturals and reals), metric space convergence, continuity.}
   
-  \section{3.30 Wednesday Week 1}
+  \section{3.30 Wednesday Week 1: Limit of a function: definition and alternative formulations via images of balls and sequential characterization. Limit on a set, left and right limits for functions on \texorpdfstring{$\mathbb R$}{R}. Discontinuities of first and second kind. Monotone functions have no discontinuities of second kind.}
   
-  \textbf{Recall:} $f \colon X \to Y$ is said to be {\boldmath \bfseries continuous at $x \in X$} if $\forall \, \varepsilon > 0 \, \exists \, \delta > 0 \, \forall \, z \in x: \rho_X(x, z) < \delta \Rightarrow \rho(f(z), f(x)) < \varepsilon$.
+  \underline{{\boldmath \bfseries Limits of functions}}
+  
+  \textbf{Recall:} $f \colon X \to Y$ is said to be {\boldmath \bfseries continuous at $x \in X$} if 
+  \[
+    \forall \, \varepsilon > 0 \, \exists \, \delta > 0 \, \forall \, z \in x: \rho_X(x, z) < \delta \Rightarrow \rho(f(z), f(x)) < \varepsilon.
+  \]
 
   Alternatives:
   \begin{itemize}
-    \item $f(B_X(x, \delta)) \subseteq B_Y(f(x), \varepsilon)$
+    \item $f(B_X(x, \delta)) \subseteq B_Y(f(x), \varepsilon)$; 
+    \item $\forall \, \left \{ x_n \right \}_{n \in \mathbb N} \in X^\mathbb N: x_n \to x \Rightarrow f(x_n) \to f(x)$.
   \end{itemize}
+  
+  A function $f \colon X \to Y$ is {\boldmath \bfseries continuous} if 
+  \[
+    \forall \, x \in X: \text{$f$ is continuous at $x$, }
+  \]
+  or, alternatively,  
+  \[
+    \forall \, O \subseteq Y \text{ open}: f^{-1}(O) \text{ open.}
+  \]
 
   \begin{defn}
     A function $f \colon X \to Y$ {\boldmath \bfseries has limit $y \in Y$ at $x \in X$}, notation $\lim_{z \to x} f(z) = y$, if 
@@ -35,6 +50,8 @@
     \end{itemize}
   \end{defn}
   
+  \newpage
+
   \begin{defn}
     $f$ has a {\boldmath \bfseries removable discontinuity} at $x$ if $\lim_{z \to x} f(z)$ exists but $\neq f(x)$.
   \end{defn}
@@ -48,10 +65,8 @@
     For $f \colon \mathbb R \to \mathbb R$, let $x \in \overline{\operatorname{Dom}(f)}$ be such that $\operatorname{Dom}(f) \cap (x, \infty) \neq \varnothing$ and $\operatorname{Dom}(f) \cap (-\infty, x) \neq \varnothing$.
     Then $\lim_{z \to x^+} f(z) := \lim_{z \to x, z \in \operatorname{Dom}(f) \cap (x, \infty)} f(z) \land \lim_{z \to x^-} f(z) := \lim_{z \to x, z \in \operatorname{Dom}(f) \cap (-\infty, x)} f(z)$ are the {\boldmath \bfseries right / left limits of $f$ at $x$}.
 
-    Alternate notation: $f(x^+)$, $f(x^-)$.
+    Alternative notation: $f(x^+)$, $f(x^-)$.
   \end{defn}
-  
-  \newpage
   
   \begin{eg}
     \begin{equation}
@@ -88,6 +103,8 @@
     \end{itemize}
   \end{defn}
   
+  \newpage
+  
   \begin{eg}
     \begin{equation}
       f(x) := \begin{cases}
@@ -96,6 +113,8 @@
         0 & x \leq 0.
       \end{cases}
     \end{equation}
+    
+    % todo: add figure?
     
     This function has a discontinuity of second kind at 0.
   \end{eg}
@@ -114,9 +133,10 @@
     Let $\delta := z_\varepsilon - x$.
     Then $\forall \, z \in (x, x + \delta): f(z) \leq f(z_\varepsilon) < L + \varepsilon$.
     Then $\forall \, z \in (x, x + \delta): L \leq f(z) < L + \varepsilon$ and therefore $\left | f(z) - L \right | < \varepsilon$.
+    Then $\lim_{z \to x^+} f(z) = L$.
   \end{prf}
   
-  \section{3.31 Thursday Week 1}
+  \section{3.31 Thursday Week 1: Monotone functions have only countably many discontinuities. Functions of bounded variation. Jordan decomposition theorem. Comments on uniqueness. Rectifiability of curves. Limsup and liminf of a function.}
   
   \underline{\boldmath \bfseries Limits of functions}
   
@@ -241,7 +261,7 @@
   
   \begin{lem}
     \[
-      \lim_{z \to x} f(z) \text{exists in $\mathbb R$} \Leftrightarrow \limsup_{z \to x} f(z) = \liminf_{z \to x} f(z) \in \mathbb R.
+      \lim_{z \to x} f(z) \text{ exists in $\mathbb R$} \Leftrightarrow \limsup_{z \to x} f(z) = \liminf_{z \to x} f(z) \in \mathbb R.
     \]
   \end{lem}
 \end{document}
