@@ -148,10 +148,10 @@
   \end{lem}
   
   \begin{prf}
-    Pick $k, - \in \mathbb N$ and let $A_{m, k} := \left \{ x \in [-m, m] : \left | f(x^+) - f(x^-) \right | > \frac{1}{k + 1} \right \}$.
+    Pick $k, m \in \mathbb N$ and let $A_{m, k} := \left \{ x \in [-m, m] : \left | f(x^+) - f(x^-) \right | > \frac{1}{k + 1} \right \}$.
     We claim that $A_{m, k}$ is finite.
     
-    Let $x_{0} < x_{1} < \cdots x_n$ be such that $\forall \, i \leq n: x_i \in A_{k, m}$.
+    Let $x_{0} < x_{1} < \cdots < x_n$ be such that $\forall \, i \leq n: x_i \in A_{k, m}$.
     Assume (without loss of generality) that $f$ is non-decreasing.
     Then 
     \begin{align}
@@ -276,11 +276,11 @@
     \[ 
       \forall \, \left \{ t_n \right \}_{n \in \mathbb N} \in (E \setminus \left \{ x \right \})^\mathbb N: t_n \to x \Rightarrow f(t_n) \to \alpha.
     \]
+
+    \begin{note}
+      $f$ need not be defined at $x$.
+    \end{note}
   \end{defn}
-  
-  \begin{note}
-    $f$ need not be defined at $x$.
-  \end{note}
   
   \begin{rmk}
     \[
@@ -301,8 +301,6 @@
     Let $f \colon (a, b) \to \mathbb R$ be not continuous at $x$. Then $f$ has a {\boldmath \bfseries discontinuity of first kind} at $x$ if $f(x+)$ and $f(x-)$ both exist.
     Otherwise it is of {\boldmath \bfseries second kind}.
   \end{defn}
-  
-  \newpage
   
   \begin{rmk}
     Discontinuities of the first kind are also known as {\boldmath \bfseries simple discontinuities}.
@@ -344,4 +342,145 @@
     \]
     In words, this means that for any interval, the secant line is above the graph.
   \end{defn}
+  
+  \section{4.4 Monday Week 2}
+  
+  \underline{\boldmath \bfseries Last time:} $\lim_{z \to x} f(z)$, $\limsup_{z \to x} f(z) = \inf_{\delta > 0} \sup_{z \in B(x, \delta) \setminus \left \{ x \right \}x} f(z)$
+  
+  \begin{lem}
+    \[
+      \lim_{z \to x} f(z) \text{ exists (in $\mathbb R$)} \Leftrightarrow \limsup_{z \to x} f(z) = \liminf_{z \to x} f(z) \in \mathbb R.
+    \]
+  \end{lem}
+  
+  \begin{prf}
+    Both are equivalent: 
+    \[
+      \forall \, \varepsilon > 0 \, \exists \, \delta > 0: 0 \leq \sup_{z \in B(x, \delta) f(z) \setminus \left \{ x \right \}} - \inf_{z \in B(x, \delta) \setminus \left \{ x \right \}} f(z) \leq 2 \varepsilon.
+    \]
+  \end{prf}
+  
+  \begin{defn}
+    \[
+      \lim_{z \to x} f(z) = \begin{cases}
+        +\infty & \limsup_{z \to x} f(z) = \liminf_{z \to x} f(z) = +\infty \\
+        -\infty & \limsup_{z \to x} f(z) = \liminf_{z \to x} f(z) = -\infty.
+      \end{cases}
+    \]
+  \end{defn}
+  
+  \begin{note}
+    This characterization works even outside $\mathbb R$-valued functions:
+    \[
+      \lim_{z \to x} f(z) \text{ exists} \Leftrightarrow \lim_{\delta \to 0^+} \sup \underbrace{\left \{ \rho(f(z), f(u)) : z, u \in B(x, \delta) \setminus \left \{ x \right \} \right \}}_{= \operatorname{diam}(f(B(x, \delta) \setminus \left \{ x \right \}))} = 0.
+    \]
+  \end{note}
+  
+  \underline{\boldmath \bfseries The derivative}
+
+  \begin{defn}
+    Let $f \colon \mathbb R \to \mathbb R$, $x \in \operatorname{int} (\operatorname{Dom}(f))$.
+    We say that $f$ has {\boldmath \bfseries derivative} or {\boldmath \bfseries is differentiable at $x$} if 
+    \[
+      f'(x) := \lim_{z \to x} \frac{f(z) - f(x)}{z - f} \text{ exists in $\mathbb R$}.
+    \]
+    
+    We call $f'(x)$ (Lagrange notation) the {\boldmath \bfseries derivative at $x$}, alternative notation $\frac{df}{dx}$ (Leibnitz notation).
+  \end{defn}
+  
+  \begin{lem}
+    \[
+      f'(x) \text{ exists} \Rightarrow \text{$f$ continuous at $x$}.
+    \]
+  \end{lem}
+  
+  \begin{prf}
+    The existence of $f'(x)$ implies that $\exists \, \delta_0 > 0 \, \forall \, z \in \mathbb R: 0 < \left | z - x \right | < \delta_0 \Rightarrow \left | \frac{f(z) - f(x)}{z - x} \right | \leq 1 + \left | f'(x) \right |$.
+    Then, choosing $\varepsilon > 0$ and letting $\delta := \frac{\varepsilon}{1 + \left | f'(x) \right |}$, we get 
+    \[
+      \forall \, z \in \mathbb R: 0 < \left | z - x \right | < \sigma \mathbb \Rightarrow \left | f(z) - f(x) \right | \leq (1 + \left | f'(x) \right |) \left | z - x \right | < (1 + \left | f'(x) \right |) = \varepsilon.
+    \]
+    Since $f(z) - f(x) = 0$ for $z = x$, we are done (in fact, we have shown that $f$ is lipschitz continuous).
+  \end{prf}
+  
+  Another way to write existence of $f'(x)$: 
+  \[
+    f(z) - f(x) = (f'(x) + u_x(z)) (z - x)
+  \]
+  where $\lim_{z \to x} u_x(z) = 0$.
+  (Just define: $u_x(z) := \frac{f(z) - f(x)}{z - x} - f'(x)$ for $z \neq x$)
+  
+  \begin{lem}[Linear approximation]
+    \[
+      \text{$f'(x)$ exists} \Leftrightarrow \exists \, L \in \mathbb R: \lim_{\delta \to 0^+} \sup_{\left | z - x \right | < \delta} \frac{1}{\delta} \left | f(z) - f(x) - L (z - x) \right | = 0.
+    \]
+  \end{lem}
+  
+  \begin{lem}[Sum \& product rule]
+    Let $f, g$ be differentiable at $x$.
+    Then so are $f + g$ and $f \cdot g$ and 
+    \begin{align*}
+      (f + g)'(x) &= f'(x) + g'(x) \\ 
+      (f \cdot g)'(x) &= f'(x) g(x) + g'(x) f(x) \text{(Leibnizt rule)}.
+    \end{align*}
+  \end{lem}
+  
+  \begin{prf}[Product rule]
+    \[
+      f(z) g(z) - f(x) g(x) = (f(z) - f(x)) g(z) + (g(z) - g(x)) f(z).
+    \]
+    Then 
+    \[
+      \frac{f(z) g(z) - f(x) g(x)}{z - x} = \frac{f(z) - f(x)}{z - x} g(z) + \frac{g(z) - g(x)}{z - x} f(z).
+    \]
+    Since $g(z) \to g(x)$ by continuity of $g$, formula follows by sum \& product rule for limit.
+  \end{prf}
+  
+  \begin{lem}[Chain rule]
+    Let $f$ be differentiable at $x$ and $g$ at $f(x)$.
+    Then $g \circ f$ is differentiable at $x$ and 
+    \[
+      (g \circ f)'(x) = g'(f(x)) f'(x) \quad \left ( \frac{dg}{df} \frac{df}{dx} \right )
+    \]
+  \end{lem}
+  
+  \newpage
+  
+  \begin{prf}
+    Define $v_{f(x)}$ such that $g(y) - g(f(x)) = (g'(f(x))) + v_{f(x)}(y)) (y  - f(x))$ and $u_x$ such that $f(z) - f(x) = (f'(x) + u_x(z)) (z - x)$.
+    \begin{align*}
+      (g \circ f)(z) - (g \circ f)(x) &= [g'(f(x)) + v_{f(x)(f(z))}] (f(z) - f(x)) \\ 
+      &= [g'(f(x)) + v_{f(x)}(f(z))] [f'(x) + u_x(z)] (z - x)
+    \end{align*}
+    Dividing by $z - x \neq 0$, note that $f(z) \to f(x)$ implies $v_{f(x)}(f(z)) \to 0$ as $z \to x$, we are done.
+  \end{prf}
+  
+  \begin{lem}
+    Let $f \colon \mathbb R \to \mathbb R$ be injective on $\operatorname{Dom}(f)$ and differentiable at $x \in \operatorname{int}(\operatorname{Dom}(f))$.
+    Assume $f'(x) \neq 0$ and $f(x) \in \operatorname{int}(\operatorname{Ran}(f))$.
+    Then $f^{-1}$ is differentiable at $f(x)$ and 
+    \[
+      (f^{-1})'(f(x)) = \frac{1}{f'(x)}.
+    \]
+    
+    In Leibnitz notation: 
+    \[
+      \frac{dy}{dx} = \frac{1}{\frac{dx}{dy}}.
+    \]
+  \end{lem}
+  
+  \begin{lem}[First derivative test]
+    Let $f \colon [a, b] \to \mathbb R$ be continuous on $[a, b]$ and differentiable on $(a, b)$.
+    Then if $x \in (a, b)$ is a local maximum of $f$ (i.e. $\exists \, \delta > 0 \, \forall \, z \in \mathbb R: \left | z - x \right | < \delta \Rightarrow f(x) \geq f(z)$) then $f'(x) = 0$.
+  \end{lem}
+  
+  \begin{prf}
+    \[
+      z > x \land \left | z - x \right | < \delta \Rightarrow \frac{f(z) - f(x)}{z - x} \leq 0 \Rightarrow f'(x) \leq 0
+    \]
+    and 
+    \[
+      z < x \land \left | z - x \right | < \delta \Rightarrow \frac{f(z) - f(x)}{z - x} \geq 0 \Rightarrow f'(x) \geq 0.
+    \]
+  \end{prf}
 \end{document}
