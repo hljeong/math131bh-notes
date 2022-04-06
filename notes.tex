@@ -303,7 +303,7 @@
   \end{defn}
   
   \begin{rmk}
-    Discontinuities of the first kind are also known as {\boldmath \bfseries simple discontinuities}.
+    Discontinuities of first kind are also known as {\boldmath \bfseries simple discontinuities}.
     The cases include 
     \begin{itemize}
       \item $f(x+) = f(x-) \neq f(x)$: {\boldmath \bfseries removable discontinuity}, and  
@@ -483,4 +483,107 @@
       z < x \land \left | z - x \right | < \delta \Rightarrow \frac{f(z) - f(x)}{z - x} \geq 0 \Rightarrow f'(x) \geq 0.
     \]
   \end{prf}
+  
+  \section{4.6 Wednesday Week 2: Discussion}
+  
+  {\boldmath \bfseries Recall:} For, $x \colon [a, b] \to \mathbb R$, the total variation
+  \[
+    V(f, [a, b]) = \sup_{\Pi} \sum_{i = 1}^n \left | f(x_i) -f(x_{i - 1})  \right |
+  \]
+  where $\Pi = \left \{ a = x_0 < x_1 < \cdots < x_n = b  \right \}$.
+  We say $f \in BV([a, b])$ if $V(f, [a, b]) < \infty$.
+  
+  \begin{thm}[Jordan decomposition]
+    \[
+      \forall \, f \in BV([a, b]) \, \exists \, h, g \colon [a, b] \to \mathbb R \text{ nondecreasing}: f = h - g.
+    \]
+  \end{thm}
+  
+  \begin{cor}
+    $f \in BV([a, b])$ can only have discontinuities of first kind and countably many of them.
+  \end{cor}
+  
+  \begin{eg}
+    $f(x) = \sin x \in BV([-1, 1])$ since $f$ is nondecreasing on $[-1, 1]$ and hence $V(f, [a, b]) = f(b) - f(a)$.
+  \end{eg}
+  
+  \begin{eg}
+    $f(x) = \sin x \in BV([-M, M])$ by additive property of $V$.
+  \end{eg}
+  
+  {\boldmath \bfseries Q.} Does $BV([a, b])$ imply bounded on $[a, b]$?
+
+  Yes.
+  By triangle inequality, 
+  \[
+    \left | f(x) \right | \leq \left | f(a) \right | + \left | f(a) - f(x) \right | \leq \left | f(a) \right | + V(f, [a, b]) < \infty.
+  \]
+  
+  {\boldmath \bfseries Q.} Does being bounded on $[a, b]$ imply $BV([a, b])$.
+
+  No.
+  A counterexample is 
+  \[
+    f(x) = \begin{cases}
+      \sin \frac{1}{x} & x \neq 0 \\ 
+      0 & x = 0
+    \end{cases}
+  \]
+  on $[0, 1]$.
+  
+  Choose $x_n = 1 / (n \pi / 2)$ such that $\sin(1 / x_n) = \sin(n \pi / 2)$.
+  Then $\sum_{i = 1}^{2 n} \left | f(x_i) - f(x_{i - 1}) \right | = \sum_{k = 1}^n \left | f(x_{2 k + 1}) \right | = n \to \infty$.
+  
+  \begin{eg}
+    Is 
+    \[
+      f(x) = \begin{cases}
+        x \sin \frac{1}{x} & x \neq 0 \\ 
+        0 & x = 0
+      \end{cases}
+    \]
+    on $[0, 1]$ of bounded variation?
+    
+    No.
+    Choose the same $x_n$ as above.
+    Note that $f(x_n) = \frac{2}{n \pi} \sin(n \pi / 2)$.
+    Then $\sum_{i = 1}^{2 n} \left | f(x_i) - f(x_{i - 1}) \right | = \sum_{k = 1}^n \frac{2}{(2 k - 1) \pi} \to \infty$.
+  \end{eg}
+  
+  \begin{eg}
+    Is 
+    \[
+      f(x) = \begin{cases}
+        x^2 \sin \frac{1}{x} & x \neq 0 \\ 
+        0 & x = 0
+      \end{cases}
+    \]
+    on $[0, 1]$ of bounded variation?
+    
+    Yes.
+    Note that 
+    \[
+      f'(0) = \lim_{t \to 0} \frac{t^2 \sin \frac{1}{t} - 0}{t} = \lim_{t \to 0} t \sin \frac{1}{t} = 0.
+    \]
+    
+    Note that for $x \neq 0$, 
+    \[
+      f'(x) = 2 x \sin \frac{1}{x} + x^2 \left ( -\frac{1}{x^2} \right ) \cos \frac{1}{x} = 2 x \sin \frac{1}{x} - \cos \frac{1}{x}
+    \]
+    is bounded: $\left | f'(x) \right | \leq 2 \left | x \right | + 1 \leq 3$.
+
+    Note that by mean value theorem, we have 
+    \[
+      \sum \left | f(x_i) - f(x_{i - 1}) \right | \leq \sum \left | f'(\xi) \right | (x_i - x_{i - 1}) \leq M (b - a) < \infty
+    \]
+    where $\left | f'(\xi) \right | \leq M$.
+
+    Then $f$ is of bounded variation on $[0, 1]$.
+  \end{eg}
+  
+  \begin{thm}
+    If $f'$ exists and is bounded on $[a, b]$ then $f$ is of bounded variation.
+  \end{thm}
+  
+  {\boldmath \bfseries Q.} Does the existence $f'$ on $[a, b]$ and $f$ being of bounded variation on $[a, b]$ imply $f'$ is bounded on $[a, b]$?
 \end{document}
