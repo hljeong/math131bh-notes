@@ -34,12 +34,12 @@
   \begin{defn}
     A function $f \colon X \to Y$ {\boldmath \bfseries has limit $y \in Y$ at $x \in X$}, notation $\lim_{z \to x} f(z) = y$, if 
     \[
-      \forall \, \varepsilon \, \exists \, \delta > 0 \, \forall \, z \in X: 0 < \rho_X(x, z) < \delta \Rightarrow \rho_Y(f(z), y) < \varepsilon.
+      \forall \, \varepsilon > 0 \, \exists \, \delta > 0 \, \forall \, z \in X: 0 < \rho_X(x, z) < \delta \Rightarrow \rho_Y(f(z), y) < \varepsilon.
     \]
     
     Alternatives: 
     \begin{itemize}
-      \item $f(B_X(x, \delta) \setminus \left \{ x \right \}) \subseteq B_Y(y, \varepsilon))$; 
+      \item $f(B_X(x, \delta) \setminus \left \{ x \right \}) \subseteq B_Y(y, \varepsilon)$; 
 
       \item $\forall \, \left \{ x_n \right \}_{n \in \mathbb N} \in X^\mathbb N: (\forall \, n \in \mathbb N: x_n \neq x) \land x_n \to x \Rightarrow f(x_n) \to y$; 
         
@@ -56,6 +56,7 @@
     $f$ has a {\boldmath \bfseries removable discontinuity} at $x$ if $\lim_{z \to x} f(z)$ exists but $\neq f(x)$.
   \end{defn}
   
+  % todo: is this a defn?
   \begin{defn}
     Let $A \subseteq X$ be nonempty, $x \in \overline A$ be not an isolated point.
     Then $\lim_{z \to x} f(z) = \lim_{z \to x} f_A(z)$ where $f_A$ is the restriction of $f$ to $A$.
@@ -63,7 +64,7 @@
   
   \begin{defn}
     For $f \colon \mathbb R \to \mathbb R$, let $x \in \overline{\operatorname{Dom}(f)}$ be such that $\operatorname{Dom}(f) \cap (x, \infty) \neq \varnothing$ and $\operatorname{Dom}(f) \cap (-\infty, x) \neq \varnothing$.
-    Then $\lim_{z \to x^+} f(z) := \lim_{z \to x, z \in \operatorname{Dom}(f) \cap (x, \infty)} f(z) \land \lim_{z \to x^-} f(z) := \lim_{z \to x, z \in \operatorname{Dom}(f) \cap (-\infty, x)} f(z)$ are the {\boldmath \bfseries right / left limits of $f$ at $x$}.
+    Then $\lim_{z \to x^+} f(z) := \lim_{z \to x, z \in \operatorname{Dom}(f) \cap (x, \infty)} f(z)$ and $\lim_{z \to x^-} f(z) := \lim_{z \to x, z \in \operatorname{Dom}(f) \cap (-\infty, x)} f(z)$ are the {\boldmath \bfseries right / left limits of $f$ at $x$}.
 
     Alternative notation: $f(x^+)$, $f(x^-)$.
   \end{defn}
@@ -200,8 +201,7 @@
     We need to show that $h$ and $g$ are nondecreasing.
     
     Let $a \leq t < t' \leq b$.
-    Then for any partition $\Pi$ of $[a, t]$.
-    $\Pi' = \Pi \cup \left \{ t' \right \}$ is a partition of $[a, t']$.
+    Then for any partition $\Pi$ of $[a, t]$, $\Pi' = \Pi \cup \left \{ t' \right \}$ is a partition of $[a, t']$.
     Then 
     \begin{equation}
       V(f, [0, t']) \geq \sum_{i = 1}^m \left | f(t_i) - f(t_{i - 1}) \right | + \left | f(t') - f(t) \right |.
@@ -235,7 +235,7 @@
   \begin{defn}
     Assuming $\operatorname{Dom}(f) = [a, b]$, the {\boldmath \bfseries length of $\mathcal C$} is 
     \[
-      \ell(\mathcal C) := \sup_{\Pi = \left \{ t_i \right \}_{i = 1}^n} \sum_{i = 1}^n \rho(f(t_{i - 1}), f(t_i)).
+      \ell(\mathcal C) := \sup_{\Pi = \left \{ t_i \right \}_{i = 0}^n} \sum_{i = 1}^n \rho(f(t_{i - 1}), f(t_i)).
     \]
   \end{defn}
   
@@ -343,9 +343,9 @@
     In words, this means that for any interval, the secant line is above the graph.
   \end{defn}
   
-  \section{4.4 Monday Week 2}
+  \section{4.4 Monday Week 2: Existence of limit is equivalent to equality and finiteness of limsup and liminf. Derivative of a real valued function of one real variable. Differentiability implies continuity. Connection with linear approximation. Sum and product rule, chain rule and inverse function rule. First-derivative test and discussion of important counterexamples.}
   
-  \underline{\boldmath \bfseries Last time:} $\lim_{z \to x} f(z)$, $\limsup_{z \to x} f(z) = \inf_{\delta > 0} \sup_{z \in B(x, \delta) \setminus \left \{ x \right \}x} f(z)$
+  {\boldmath \bfseries \underline{Last time}:} $\lim_{z \to x} f(z)$, $\limsup_{z \to x} f(z) = \inf_{\delta > 0} \sup_{z \in B(x, \delta) \setminus \left \{ x \right \}x} f(z)$
   
   \begin{lem}
     \[
@@ -356,7 +356,7 @@
   \begin{prf}
     Both are equivalent: 
     \[
-      \forall \, \varepsilon > 0 \, \exists \, \delta > 0: 0 \leq \sup_{z \in B(x, \delta) f(z) \setminus \left \{ x \right \}} - \inf_{z \in B(x, \delta) \setminus \left \{ x \right \}} f(z) \leq 2 \varepsilon.
+      \forall \, \varepsilon > 0 \, \exists \, \delta > 0: 0 \leq \sup_{z \in B(x, \delta) \setminus \left \{ x \right \}} f(z) - \inf_{z \in B(x, \delta) \setminus \left \{ x \right \}} f(z) \leq 2 \varepsilon.
     \]
   \end{prf}
   
@@ -376,16 +376,18 @@
     \]
   \end{note}
   
+  \newpage
+  
   \underline{\boldmath \bfseries The derivative}
 
   \begin{defn}
     Let $f \colon \mathbb R \to \mathbb R$, $x \in \operatorname{int} (\operatorname{Dom}(f))$.
     We say that $f$ has {\boldmath \bfseries derivative} or {\boldmath \bfseries is differentiable at $x$} if 
     \[
-      f'(x) := \lim_{z \to x} \frac{f(z) - f(x)}{z - f} \text{ exists in $\mathbb R$}.
+      f'(x) := \lim_{z \to x} \frac{f(z) - f(x)}{z - x} \text{ exists in $\mathbb R$}.
     \]
     
-    We call $f'(x)$ (Lagrange notation) the {\boldmath \bfseries derivative at $x$}, alternative notation $\frac{df}{dx}$ (Leibnitz notation).
+    We call $f'(x)$ (Lagrange notation) the {\boldmath \bfseries derivative at $x$}, alternative notation $\frac{df}{dx}$ (Leibniz notation).
   \end{defn}
   
   \begin{lem}
@@ -398,7 +400,7 @@
     The existence of $f'(x)$ implies that $\exists \, \delta_0 > 0 \, \forall \, z \in \mathbb R: 0 < \left | z - x \right | < \delta_0 \Rightarrow \left | \frac{f(z) - f(x)}{z - x} \right | \leq 1 + \left | f'(x) \right |$.
     Then, choosing $\varepsilon > 0$ and letting $\delta := \frac{\varepsilon}{1 + \left | f'(x) \right |}$, we get 
     \[
-      \forall \, z \in \mathbb R: 0 < \left | z - x \right | < \sigma \mathbb \Rightarrow \left | f(z) - f(x) \right | \leq (1 + \left | f'(x) \right |) \left | z - x \right | < (1 + \left | f'(x) \right |) = \varepsilon.
+      \forall \, z \in \mathbb R: 0 < \left | z - x \right | < \delta \mathbb \Rightarrow \left | f(z) - f(x) \right | \leq (1 + \left | f'(x) \right |) \left | z - x \right | < (1 + \left | f'(x) \right |) \frac{\epsilon}{1 + \left | f'(x) \right |} = \varepsilon.
     \]
     Since $f(z) - f(x) = 0$ for $z = x$, we are done (in fact, we have shown that $f$ is lipschitz continuous).
   \end{prf}
@@ -421,11 +423,11 @@
     Then so are $f + g$ and $f \cdot g$ and 
     \begin{align*}
       (f + g)'(x) &= f'(x) + g'(x) \\ 
-      (f \cdot g)'(x) &= f'(x) g(x) + g'(x) f(x) \text{(Leibnizt rule)}.
+      (f \cdot g)'(x) &= f'(x) g(x) + g'(x) f(x) \text{(Leibniz rule)}.
     \end{align*}
   \end{lem}
   
-  \begin{prf}[Product rule]
+  \begin{prf} For product rule, ote that  
     \[
       f(z) g(z) - f(x) g(x) = (f(z) - f(x)) g(z) + (g(z) - g(x)) f(z).
     \]
@@ -463,7 +465,7 @@
       (f^{-1})'(f(x)) = \frac{1}{f'(x)}.
     \]
     
-    In Leibnitz notation: 
+    In Leibniz notation: 
     \[
       \frac{dy}{dx} = \frac{1}{\frac{dx}{dy}}.
     \]
@@ -586,4 +588,136 @@
   \end{thm}
   
   {\boldmath \bfseries Q.} Does the existence $f'$ on $[a, b]$ and $f$ being of bounded variation on $[a, b]$ imply $f'$ is bounded on $[a, b]$?
+  
+  \section{4.7 Thursay Week 2: Mean-Value Theorems of Rolle, Lagrange and Cauchy. Applications: Monotone differentiable functions have \texorpdfstring{\newline}{}derivative of one sign. Derivative of a differentiable function has no discontinuities of first kind (but those of second kind can occur densely). L'Hospital's Rule and its proof from Cauchy's MVT.}
+  
+  \section{4.8 Friday Week 2}
+
+  {\boldmath \bfseries \underline{Taylor's theorem}}
+  
+  \begin{defn}[Higher order derivatites]
+    Define $f^{(0)} := f$ and for all $n \in \mathbb N$ define $f^{(n + 1)}(x) := \left ( f^{(n)} \right )'(x)$ assuming the derivatives exist.
+    We call $f^{(n)}$ the {\boldmath \bfseries $n$-th derivative of $f$}.
+  \end{defn}
+  
+  \begin{thm}[Taylor's theorem (Taylor 1715, Gregory 1671)]
+    Let $n \in \mathbb N$ and $f \colon (a, b) \to \mathbb R$ an $(n + 1)$-times differentiable function.
+    Then 
+    \[
+      \forall \, x_0 \in (a, b) \, \forall \, x \in (x_0, b) \, \exists \, \xi \in (x_0, x): f(x) = \underbrace{\sum_{k = 0}^n \frac{f^{(k)}(x_0)}{k!} (x - x_0)^k}_{\text{$n$-th order Taylor polynomial at $x_0$}} {} + \frac{f^{(n + 1)}(\xi)}{(n + 1)!} (x - x_0)^{n + 1}.
+    \]
+  \end{thm}
+  
+  \begin{prf}
+    Based on MVT.
+    
+    Denote
+    \begin{equation}
+      P_n(z) := \sum_{k = 0}^n \frac{f^{(k)}(x_0)}{k!} (z - x_0)^k.
+    \end{equation}
+    
+
+    Pick $x \in (x_0, b)$ and denote 
+    \begin{equation}
+      A := \frac{f(x) - P_n(x)}{(x - x_0)^{n + 1}}.
+    \end{equation}
+    
+    Set 
+    \begin{equation}
+      h(z) := f(z) - P_n(z) - A(z - x_0)^{n + 1}.
+    \end{equation}
+    
+    Note that 
+    \[
+      \forall \, k \in \mathbb N: k \leq n \Rightarrow f^{(k)}(x_0) = 0.
+    \]
+    
+    We claim that 
+    \[
+      \forall \, k \in \mathbb N: 1 \leq k \leq n + 1 \Rightarrow \exists \, \xi_k \in (x_0, x): h^{(k)}(\xi_k) = 0.
+    \]
+    
+    For $k = 1$, the choice of $A$ implies $h(x) = 0$ so since $h(x_0) = 0$, by Rolle's theorem
+    \[
+      \exists \, \xi_1 \in (x_0, x): h'(\xi) = 0.
+    \]
+    
+    Assume true for some $k \in \mathbb N$ such that $1 \leq k \leq n$.
+    Then $h^{(k)}(x_0) = 0$ and $h^{(k)}(\xi_k) = 0$ for $\xi_k \in (x_0, x)$.
+    Then by Rolle's theorem 
+    \[
+      \exists \, \xi_{k + 1} \in (x_0, \xi_k): h^{(n + 1)}(\xi_{k + 1}) = 0.
+    \]
+    
+    Now observe that $P_n^{(n + 1)} = 0$.
+    Then $0 = h^{(n + 1)}(\xi_{n + 1}) = f^{(n + 1)}(\xi_{n + 1}) - A (n + 1)!$.
+    Then 
+    \[
+      f(x) - P_n(x) = A(x - x_0)^{n + 1} = \frac{f^{(n + 1)}(\xi_{n + 1})}{(n + 1)!} (x - x_0)^{n + 1}.
+    \]
+  \end{prf}
+  
+  {\boldmath \bfseries \underline{Riemann integral}} (Riemann 1854)
+  
+  {\boldmath \bfseries Goal:} Given $f \colon [a, b] \to \mathbb R$, assign meaning to the area under the graph of $f$ on $[a, b]$; namely to the set 
+  \[
+    \left \{ (x, y) \in \mathbb R^2 : x \in [a, b] \land 0 \leq y \leq f(x) \right \} \quad \text{(for $f \geq 0$)}.
+  \]
+  
+  {\boldmath \bfseries Idea:} Approximate $f$ with a piecewise constant function and use that the area of a rectangle is ``known.''
+  
+  \begin{defn}
+    Given $[a, b]$, a {\boldmath \bfseries marked partition $\Pi$} of $[a, b]$ is two sequences $\left \{ t_i \right \}_{i = 0}^n$, $\left \{ t^*_i \right \}_{i = 1}^n$ such that 
+    \begin{itemize}
+      \item $a = t_0 < t_1 < \dots < t_{n - 1} < t_n = b$ and 
+
+      \item $\forall \, i = 1, \dots, n: t^*_i \in [t_{i - 1}, t_i]$.
+    \end{itemize}
+  \end{defn}
+  
+  \begin{defn}
+    The {\boldmath \bfseries mesh of $\Pi$} is defined by $|| \Pi || := \max_{i = 1, \dots, n} \left | t_i - t_{i - 1} \right |$.
+  \end{defn}
+  
+  \begin{defn}
+    Given $f \colon [a, b] \to \mathbb R$ and a marked partition $\Pi$, the associated {\boldmath \bfseries Riemann sum} is 
+    \[
+      R(f, \Pi) := \sum_{i = 1}^n f(t^*_i) (t_i - t_{i - 1}).
+    \]
+  \end{defn}
+  
+  \newpage
+  
+  \begin{defn}
+    A function $f \colon [a, b] \to \mathbb R$ is said to be {\boldmath \bfseries Riemann integrable} (on $[a, b]$) if there exists $L \in \mathbb R$ such that 
+    \[
+      \forall \, \varepsilon > 0 \, \exists \, \delta > 0 \, \forall \, \Pi = \text{marked partition of $[a, b]$}: || \Pi || < \delta \Rightarrow \left | R(f, \Pi) - L \right | < \varepsilon.
+    \]
+    
+    We sometimes write this as $\lim_{|| \Pi || \to 0} R(f, \Pi) = L$ (this $L$ is unique).
+    Notation for $L$ is $\int_a^b f(x)\ dx$.
+  \end{defn}
+  
+  \begin{lem}[Additivity and homogeneity of Reimann integral]
+    Let $f, g \colon [a, b] \to \mathbb R$ be Riemann integrable on $[a, b]$.
+    Let $\alpha, \beta \in \mathbb R$.
+    Then $\alpha f + \beta g$ is Riemann integrable on $[a, b]$ and 
+    \[
+      \int_a^b (\alpha f(x) + \beta g(x))\ dx = \alpha \int_a^b f(x)\ dx + \beta \int_a^b g(x)\ dx.
+    \]
+  \end{lem}
+  
+  \begin{prf}
+    Given $\varepsilon > 0$, pick $\delta > 0$ such that $|| \Pi || < \delta$ implies 
+    \[
+      \left | R(f, \Pi) - \int_a^b f(x)\ dx \right | < \varepsilon \land \left | R(g, \Pi) - \int_a^b g(x)\ dx \right |.
+    \]
+    
+    Since $R(\alpha f + \beta g, \Pi) = \alpha R(f, \Pi) + \beta R(g, \Pi)$, 
+    \begin{align*}
+      &\left | R(\alpha f + \beta g, \Pi) - \alpha \int_a^b f(x)\ dx - \beta \int_a^b g(x)\ dx \leq \left | \alpha \right | \right | \\ 
+      &\quad \leq \alpha \left | R(f, \Pi) - \int_a^b f(x)\ dx \right | + \left | \beta \right | \left | R(g, \Pi) - \int_a^b g(x)\ dx \right | \\ 
+      &\quad \leq (\left | \alpha \right | + \left | \beta \right |) \varepsilon.
+    \end{align*}
+  \end{prf}
 \end{document}
