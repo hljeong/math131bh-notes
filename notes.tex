@@ -70,22 +70,22 @@
   \end{defn}
   
   \begin{eg}
-    \begin{equation}
+    \[
       f(x) = \begin{cases}
         1 & x \in \mathbb Q \\ 
         0 & x \not \in \mathbb Q
       \end{cases}
-    \end{equation}
+    \]
     has no right or left limits.
   \end{eg}
   
   \begin{eg}
-    \begin{equation}
+    \[
       f(x) = \begin{cases}
         \frac{1}{n + 1} & x = q_n \text{ where $\left \{ q_n \right \}_{n \in \mathbb N}$ enumerates $\mathbb Q$} \\ 
         0 & x \not \in \mathbb Q.
       \end{cases}
-    \end{equation}
+    \]
     Then $\forall \, x \not \in \mathbb Q: \lim_{z \to x} f(z) = 0$ so $f$ is continuous on $\mathbb R \setminus \mathbb Q$, and $\forall \, x \in \mathbb Q: \lim_{z \to x} f(z) = 0$ but $f$ is not continuous at $x$.
   \end{eg}
   
@@ -107,13 +107,13 @@
   \newpage
   
   \begin{eg}
-    \begin{equation}
+    \[
       f(x) := \begin{cases}
         (-1)^n & x = \frac{1}{n + 1}, n \in \mathbb N \\ 
         \text{linear} & x \in (0, \infty) \setminus \left \{ \frac{1}{n + 1} : n \in \mathbb N \right \} \\ 
         0 & x \leq 0.
       \end{cases}
-    \end{equation}
+    \]
     
     % todo: add figure?
     
@@ -203,13 +203,13 @@
     Let $a \leq t < t' \leq b$.
     Then for any partition $\Pi$ of $[a, t]$, $\Pi' = \Pi \cup \left \{ t' \right \}$ is a partition of $[a, t']$.
     Then 
-    \begin{equation}
+    \[
       V(f, [0, t']) \geq \sum_{i = 1}^m \left | f(t_i) - f(t_{i - 1}) \right | + \left | f(t') - f(t) \right |.
-    \end{equation}
+    \]
     Taking supremum over $\Pi$ gives 
-    \begin{equation}
+    \[
       V(f, [a, t']) \geq V(f, [a, t]) + \left | f(t') - f(t) \right |.
-    \end{equation}
+    \]
     Note that $\left | f(t') - f(t) \right | \geq 0$ and $\left | f(t') - f(t) \right | \geq f(t') - f(t)$.
     Then $h(t') \geq h(t)$ and $g(t') \geq g(t)$.
   \end{prf}
@@ -313,22 +313,22 @@
   \end{rmk}
   
   \begin{eg}
-    \begin{equation}
+    \[
       f(x) = \begin{cases}
         \sin \left ( \frac{1}{x} \right ) & x \neq 0 \\ 
         0 & x = 0
       \end{cases}
-    \end{equation}
+    \]
     has a discontinuity of second kind at 0.
   \end{eg}
   
   \begin{eg}
-    \begin{equation}
+    \[
       f(x) = \begin{cases}
         \frac{1}{q} & x = \frac{p}{q} \in \mathbb Q \\ 
         0 & x \in \mathbb R \setminus \mathbb Q
       \end{cases}
-    \end{equation}
+    \]
     is continuous on $\mathbb R \setminus \mathbb Q$ and has discontinuities of first kind (removable) at every point in $\mathbb Q$.
   \end{eg}
   
@@ -445,8 +445,6 @@
       (g \circ f)'(x) = g'(f(x)) f'(x) \quad \left ( \frac{dg}{df} \frac{df}{dx} \right )
     \]
   \end{lem}
-  
-  \newpage
   
   \begin{prf}
     Define $v_{f(x)}$ such that $g(y) - g(f(x)) = (g'(f(x))) + v_{f(x)}(y)) (y  - f(x))$ and $u_x$ such that $f(z) - f(x) = (f'(x) + u_x(z)) (z - x)$.
@@ -590,8 +588,58 @@
   {\boldmath \bfseries Q.} Does the existence $f'$ on $[a, b]$ and $f$ being of bounded variation on $[a, b]$ imply $f'$ is bounded on $[a, b]$?
   
   \section{4.7 Thursay Week 2: Mean-Value Theorems of Rolle, Lagrange and Cauchy. Applications: Monotone differentiable functions have \texorpdfstring{\newline}{}derivative of one sign. Derivative of a differentiable function has no discontinuities of first kind (but those of second kind can occur densely). L'Hospital's Rule and its proof from Cauchy's MVT.}
+
+  {\boldmath \bfseries \underline{Mean value theorems}}
+
+  {\boldmath \bfseries Last time:} $f'(x) = $ derivative is linked to the local maxima and minima (first derivative test).
+
+  \begin{thm}[Mean value theorem]
+    Let $f \colon [a, b] \to \mathbb R$ be continuous on $[a, b]$ and differentiable on $(a, b)$.
+    Then 
+    \begin{enumerate}
+      \item (Rolle's theorem, 1691) $f(a) = f(b) \Rightarrow \exists \, x \in (a, b): f'(x) = 0$, 
+
+      \item (Lagrange's mean value theorem) $\exists \, x \in (a, b): f'(x) = \frac{f(b) - f(a)}{b - a}$, and 
+
+      \item (Cauchy mean value theorem, 1823) if also $g \colon [a, b] \to \mathbb R$ is continuous on $[a, b]$ and differentiable on $(a, b)$, then 
+      \[
+        \forall \, x \in (a, b): g'(x) \neq 0 \Rightarrow g(a) \neq g(b) \land \exists \exists \, x \in (a, b): \frac{f'(x)}{g'(x)} = \frac{f(b) - f(a)}{g(b) - g(a)}.
+      \]
+    \end{enumerate}
+  \end{thm}
   
-  \section{4.8 Friday Week 2}
+  \begin{prf}
+    \begin{enumerate}
+      \item $f(a) = f(b)$ $\land$ continuous function on $[a, b]$ achieves one of maximum and minimum on $(a, b)$ $\Rightarrow \exists \, x \in (a, b): \text{$x$ is local maximum or local minimum of $f$}$.
+      Then $f'(x) = 0$.
+      
+      \item Let $h(x) = f(x) - \frac{f(b) - f(a)}{b - a} (x - a)$.
+      Then $h(a) = f(a)$, $h(b) = f(b) - \frac{f(b) - f(a)}{b - a} (b - a) = f(a)$.
+      Then, by 1., $\exists \, x \in (a, b): h'(x) = f'(x) - \frac{f(b) - f(a)}{b - a} = 0$.
+      
+      \item Let $h(x) = f(x) - \frac{f(b) - f(a)}{g(b) - g(a)} (g(x) - g(a))$.
+      Note that this is well defined since by 1. we have $g(b) \neq g(x)$. % todo: g(a)??
+      Then $h(a) = f(a) = h(b)$ so by 1. we have $\exists \, x \in (a, b): h'(x) = f'(x) - \frac{f(b) - f(a)}{g(b) - g(a)} g'(x) = 0$.
+    \end{enumerate}
+  \end{prf}
+  
+  {\boldmath \bfseries \underline{Applications}}
+  
+  \begin{lem}
+    Let $f \colon [a, b] \to \mathbb R$ be continuous on $[a, b]$ and differentiable on $(a, b)$.
+    Then 
+    \[
+      \forall \, x \in (a, b): f'(x) \geq 0 \Leftrightarrow \forall \, x, y \in [a, b]: x \leq y \Rightarrow f(x) \leq f(y).
+    \]
+  \end{lem}
+  
+  \begin{prf}
+    The $\Leftarrow$ direction is immediate from the definition of limit $\left ( \frac{f(y) - f(x)}{y - x} \geq 0 \right )$.
+    
+    For the $\Rightarrow$ direction, if $\exists \, x \geq y: f(y) < f(x)$ then by the mean value theorem $\exists \, z \in (x, y): f'(z) = \frac{f(y) - f(x)}{y - x} < 0$.
+  \end{prf}
+  
+  \section{4.8 Friday Week 2: Taylor's theorem via Mean Value Theorem (Rolle suffices). Riemann integral: motivation, definitions of marked partition, mesh of partition and Riemann sum. Notion of a function being Riemann integrable. Linearity of integral.}
 
   {\boldmath \bfseries \underline{Taylor's theorem}}
   
@@ -612,20 +660,20 @@
     Based on MVT.
     
     Denote
-    \begin{equation}
+    \[
       P_n(z) := \sum_{k = 0}^n \frac{f^{(k)}(x_0)}{k!} (z - x_0)^k.
-    \end{equation}
+    \]
     
 
     Pick $x \in (x_0, b)$ and denote 
-    \begin{equation}
+    \[
       A := \frac{f(x) - P_n(x)}{(x - x_0)^{n + 1}}.
-    \end{equation}
+    \]
     
     Set 
-    \begin{equation}
+    \[
       h(z) := f(z) - P_n(z) - A(z - x_0)^{n + 1}.
-    \end{equation}
+    \]
     
     Note that 
     \[
@@ -720,4 +768,93 @@
       &\quad \leq (\left | \alpha \right | + \left | \beta \right |) \varepsilon.
     \end{align*}
   \end{prf}
+  
+  \begin{cor}
+    Let $f, g: [0, \infty) \to \mathbb R$ be continuous on $[0, \infty)$ and differentiable on $(0, \infty)$.
+    Then 
+    \[
+      f(0) \leq g(0) \land \forall \, x \in (0, \infty): f'(x) \leq g'(x) \Rightarrow \forall \, x \in [0, \infty]: f(x) \leq g(x).
+    \]
+  \end{cor}
+  
+  \begin{eg}
+    $\forall \, x \geq 0: e^x \geq 1 + x$.
+  \end{eg}
+  
+  \begin{lem}
+    Let $f \colon [a, b] \to \mathbb R$ be continuous on $[a, b]$ and differentiable on $(a, b)$.
+    Then $f'$ has the intermediate value property.
+  \end{lem}
+  
+  \newpage
+  
+  \begin{prf}
+    Without loss of generality assume $f'$ exists on $[\tilde a, \tilde b]$ such that $\tilde a < a < b < \tilde b$.
+    Without loss of generality assume $f'(a) < f'(b)$.
+    Let $t \in (f'(a), f'(b))$.
+    Let $h(x) := f(x) - t x$.
+    Then 
+    \[
+      h'(a) < 0 \Rightarrow \exists \, x \in (a, b): h(x) < h(a).
+    \]
+    With the same reasoning, we have 
+    \[
+      h'(b) > 0 \Rightarrow \exists \, y \in (a, b): h(y) < h(b).
+    \]
+    Then 
+    \[
+      \exists \, z \in (a, b) \text{ local minimum} \Rightarrow h'(z) = f(z) - t = 0.
+    \]
+  \end{prf}
+  
+  \begin{cor}
+    The derivative of a differentiable function does not have discontinuities of first kind.
+  \end{cor}
+  
+  \begin{eg}
+    Let 
+    \[
+      f(x) = \begin{cases}
+        x^2 \sin(1 / x) & x \neq 0 \\ 
+        0 & x = 0.
+      \end{cases}
+    \]
+    Then $\forall \, x \neq 0: f'(x) = x \sin(1 / x) - \cos(1 / x)$.
+    $\lim_{x \to 0^\pm} f'(x)$ does not exist.
+
+    Also note that 
+    \[
+      \frac{f(x) - f(0)}{x - 0} = x \sin(1 / x) \underset{x \to 0}{\longrightarrow} 0
+    \]
+    so $f'(0) = 0$.
+  \end{eg}
+  
+  \begin{thm}[L'Hopital's rule, proved by Bernoulli 1694]
+    Let $f, g \colon \mathbb R \to \mathbb R$ be continuous and differentiable on $(a - \delta, a + \delta)$ where $a \in \mathbb R$ and $\delta > 0$.
+    Assume 
+    \[
+      f(a) = 0 = g(a) \land \forall \, x \in (a - \delta, a + \delta) \setminus \left \{ a \right \}: g(x) \neq 0 \land g'(x) \neq 0.
+    \]
+    Then 
+    \[
+      \lim_{x \to a} \frac{f'(x)}{g'(x)} \text{ exists} \Rightarrow \lim_{x \to a} \frac{f(x)}{g(x)} \text{ exists} \land \lim_{x \to a} \frac{f(x)}{g(x)} = \lim_{x \to a} \frac{f'(x)}{g'(x)}.
+    \]
+  \end{thm}
+  
+  \begin{prf}
+    Let $x \in (a - \delta, a + \delta) \setminus \left \{ a \right \}$.
+    Then for $x > a$ we have 
+    \[
+      \frac{f(x)}{g(x)} \underset{f(a) = 0, g(a) = 0}{=\joinrel=\joinrel=\joinrel=\joinrel=\joinrel=\joinrel=\joinrel=\joinrel=\joinrel=} \frac{f(x) - f(a)}{g(x) - g(a)} \overset{\exists \, z_x \in (a, x)}{\underset{\text{Cauchy MVT}}{=\joinrel=\joinrel=\joinrel=\joinrel=\joinrel=\joinrel=\joinrel=\joinrel=\joinrel=}} \frac{f'(z_x)}{g'(z_x)}.
+    \]
+    
+    Since $x \to a$ implies $z_x \to a$, existence of $\lim_{z \to a} \frac{f'(z)}{g'(z)}$ gives 
+    \[
+      \lim_{x \to a} \frac{f(x)}{g(x)} = \lim_{z \to a} \frac{f'(z)}{g'(z)}.
+    \]
+  \end{prf}
+  
+  \begin{eg}
+    $\lim_{x \to 0} \frac{\sin x}{x} = \lim_{x \to 0} \frac{cos x}{1} = 1$.
+  \end{eg}
 \end{document}
