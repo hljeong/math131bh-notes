@@ -423,11 +423,11 @@
     Then so are $f + g$ and $f \cdot g$ and 
     \begin{align*}
       (f + g)'(x) &= f'(x) + g'(x) \\ 
-      (f \cdot g)'(x) &= f'(x) g(x) + g'(x) f(x) \text{(Leibniz rule)}.
+      (f \cdot g)'(x) &= f'(x) g(x) + g'(x) f(x) \quad \text{(Leibniz rule)}.
     \end{align*}
   \end{lem}
   
-  \begin{prf} For product rule, ote that  
+  \begin{prf} For product rule, note that  
     \[
       f(z) g(z) - f(x) g(x) = (f(z) - f(x)) g(z) + (g(z) - g(x)) f(z).
     \]
@@ -449,7 +449,7 @@
   \begin{prf}
     Define $v_{f(x)}$ such that $g(y) - g(f(x)) = (g'(f(x))) + v_{f(x)}(y)) (y  - f(x))$ and $u_x$ such that $f(z) - f(x) = (f'(x) + u_x(z)) (z - x)$.
     \begin{align*}
-      (g \circ f)(z) - (g \circ f)(x) &= [g'(f(x)) + v_{f(x)(f(z))}] (f(z) - f(x)) \\ 
+      (g \circ f)(z) - (g \circ f)(x) &= [g'(f(x)) + v_{f(x)}(f(z))] (f(z) - f(x)) \\ 
       &= [g'(f(x)) + v_{f(x)}(f(z))] [f'(x) + u_x(z)] (z - x)
     \end{align*}
     Dividing by $z - x \neq 0$, note that $f(z) \to f(x)$ implies $v_{f(x)}(f(z)) \to 0$ as $z \to x$, we are done.
@@ -603,7 +603,7 @@
 
       \item (Cauchy mean value theorem, 1823) if also $g \colon [a, b] \to \mathbb R$ is continuous on $[a, b]$ and differentiable on $(a, b)$, then 
       \[
-        \forall \, x \in (a, b): g'(x) \neq 0 \Rightarrow g(a) \neq g(b) \land \exists \exists \, x \in (a, b): \frac{f'(x)}{g'(x)} = \frac{f(b) - f(a)}{g(b) - g(a)}.
+        \forall \, x \in (a, b): g'(x) \neq 0 \Rightarrow g(a) \neq g(b) \land \exists \, x \in (a, b): \frac{f'(x)}{g'(x)} = \frac{f(b) - f(a)}{g(b) - g(a)}.
       \]
     \end{enumerate}
   \end{thm}
@@ -857,4 +857,118 @@
   \begin{eg}
     $\lim_{x \to 0} \frac{\sin x}{x} = \lim_{x \to 0} \frac{cos x}{1} = 1$.
   \end{eg}
+  
+  \section{4.11 Monday Week 3}
+
+  {\boldmath \bfseries Last time:} $f \colon [a, b] \to \mathbb R$ is Riemann integrable (RI) if 
+  \[
+    \exists \, L \in \mathbb R \, \forall \, \varepsilon > 0 \, \exists \, \delta > 0 \, \forall \, \Pi = \text{marked partition of $[a, b]$}: || \Pi || < \delta \Rightarrow \left | R(f, \Pi) - L \right | < \varepsilon.
+  \]
+  
+  Notation: $L = \int_a^b f(x)\ dx$.
+  
+  We proved {\boldmath \bfseries linearity}: 
+  \[
+    \int_a^b (\alpha f(x) + \beta f(x))\ dx = \alpha \int_a^b f(x)\ dx + \beta \int_a^b g(x)\ dx.
+  \]
+  
+  \begin{lem}
+    If $f$ is RI on $[a, b]$ then $f$ is bounded on $[a, b]$.
+  \end{lem}
+  
+  \begin{prf}
+    RI $\Rightarrow \exists \, \delta > 0 \, \forall \, \Pi = \text{marked partition}: R(f, \Pi) \leq L + 1$.
+    Then $\forall \, i = 1, \dots, n \, \forall \, \tilde t_i: f(\tilde t_i) (t_i - t_{i - 1}) + \sum_{j = 1, \dots, n, j \neq i} f(t_j^*) (t_j - t_{j - 1}) \leq L + 1$, which means $\sup_{\tilde t_i \in [t_{i - 1}, t_i]} f(\tilde t_i) < \infty$.
+    Then $\sup_{x \in [a, b]} f(x) < \infty$.
+  \end{prf}
+  
+  \begin{lem}[Additivity]
+    Let $a < c < b$ be reals.
+    If $f$ is RI on $[a, c]$ and on $[c, b]$, then it is RI on $[a, b]$ and 
+    \[
+      \int_a^b f(x)\ dx = \int_a^c f(x)\ dx + \int_c^b f(x)\ dx.
+    \]
+  \end{lem}
+  
+  \begin{prf}
+    Let $\varepsilon > 0$ and let $\delta > 0$ be such that $\forall \, \Pi = \text{marked partition of $[a, c]$}$ and \\ $\forall \, \Pi' = \text{marked partition of $[c, b]$}$ such that $||\Pi|| < \delta \land ||\Pi'|| < \delta$ we have 
+    \[
+      \left | R(f, \Pi) - \int_a^c f(x)\ dx \right | < \varepsilon \quad \land \quad \left | R(f, \Pi') - \int_c^b f(x)\ dx \right | < \varepsilon.
+    \]
+    
+    If $\tilde \Pi$ is a marked partition of $[a, b]$ with $||\tilde \Pi|| < \delta$ containing $c$ then 
+    \[
+      \left | R(f, \Pi) - \int_a^c f(x)\ dx - \int_c^b f(x)\ dx \right | < 2 \varepsilon.
+    \]
+    
+    Suppose $\tilde \Pi$ does not contain $c$.
+    Then adding $c$ to $\tilde \Pi$ changes $R(f, \tilde \Pi)$ by at most $2 \cdot 3 \delta \sup_{x \in [a, b]} \left | f(x) \right |$.
+  \end{prf}
+  
+  \begin{lem}
+    If $f$ is RI on $[a, b]$ then 
+    \[
+      \left | \int_a^b f(x)\ dx \right | \leq (b - a) \underbrace{\sup_{x \in [a, b]} \left | f(x) \right |}_{{} < \infty}.
+    \]
+  \end{lem}
+  
+  \begin{prf}
+    Note that 
+    \[
+      \left | R(f, \Pi) \right | = \left | \sum_{i = 1}^n f(t^*_i) (t_i - t_{i - 1}) \right | \leq \sum_{i = 1}^n \left | f(t^*_i) (t_i - t_{i - 1}) \right | = R(\left | f \right |, \Pi) \leq \sup_{x \in [a, b]} \left | f(x) \right | \underbrace{\sum_{i = 1}^n (t_i - t_{i - 1})}_{{} = b - a}
+    \]
+  \end{prf}
+  
+  \begin{note}
+    If we knew that $\left | f \right |$ is RI, then this gives 
+    \[
+      \left | \int_a^b f(x)\ dx \right | \leq \int_a^b \left | f(x) \right |\ dx.
+    \]
+  \end{note}
+  
+  {\boldmath \bfseries Q:} Sufficient conditions for RI?
+  
+  {\boldmath \bfseries A:} We will answer this using Darboux's version of Riemann integral.
+  
+  \begin{defn}
+    Let $f \colon [a, b] \to \mathbb R$ be bounded.
+    Given an unmarked partition $\Pi = \left \{ t_i \right \}_{i = 1}^n$ of $[a, b]$, set 
+    \[
+      U(f, \Pi) := \sum_{i = 1}^n \sup \left \{ f(x) : x \in [t_{i - 1}, t_i] \right \} (t_i - t_{i - 1})
+    \]
+    and 
+    \[
+      L(f, \Pi) := \sum_{i = 1}^n \inf \left \{ f(x) : x \in [t_{i - 1}, t_i] \right \} (t_i - t_{i - 1})
+    \]
+    to be the {\boldmath \bfseries upper and lower Darboux sums}.
+  \end{defn}
+  
+  \begin{note}
+    $L(f, \Pi) \leq R(f, \Pi) \leq U(f, \Pi)$ for any marked partition $\Pi$.
+  \end{note}
+  
+  \begin{lem}
+    For all unmarked partitions $\Pi$ and $\Pi'$ of $[a, b]$ we have 
+    \[
+      L(f, \Pi) \leq U(f, \Pi').
+    \]
+  \end{lem}
+  
+  \begin{prf}
+    Assume first $\Pi$ is a subset of $\Pi'$, meaning that all points of $\Pi$ are included in $\Pi'$.
+    We claim that $U(f, \Pi') \leq U(f, \Pi)$ and $L(f, \Pi') \geq L(f, \Pi)$.
+    
+    Note that if $\Pi' = \Pi \cup \left \{ t \right \}$, let $[t_{i - 1}, t_i]$ be the interval containing $t$.
+    Then 
+    \[
+      \max \left \{ \sup_{x \in [t_{i - 1}, t]} f(x), \sup_{x \in [t, t_i]} f(x) \right \} \sup_{x \in [t_{i - 1}, t_i]} f(x), 
+    \]
+    resulting in $U(f, \Pi') \leq U(f, \Pi)$.
+
+    Now let $\Pi$ and $\Pi'$ be arbitrary and $\Pi \cup \Pi'$ be their common refinement.
+    Then 
+    \[
+      L(f, \Pi) \leq L(f, \Pi \cup \Pi') \leq U(f, \Pi \cup \Pi') \leq U(f, \Pi').
+    \]
+  \end{prf}
 \end{document}
