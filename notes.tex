@@ -835,7 +835,7 @@
     \[
       f(a) = 0 = g(a) \land \forall \, x \in (a - \delta, a + \delta) \setminus \left \{ a \right \}: g(x) \neq 0 \land g'(x) \neq 0.
     \]
-    Then 
+    Theni
     \[
       \lim_{x \to a} \frac{f'(x)}{g'(x)} \text{ exists} \Rightarrow \lim_{x \to a} \frac{f(x)}{g(x)} \text{ exists} \land \lim_{x \to a} \frac{f(x)}{g(x)} = \lim_{x \to a} \frac{f'(x)}{g'(x)}.
     \]
@@ -996,4 +996,195 @@
       \underline{\int_a^b} f(x)\ dx = \overline{\int_a^b} f(x)\ dx.
     \]
   \end{defn}
+  
+  \section{4.13 Wednesday Week 3}
+  
+  {\boldmath \bfseries \underline{Riemann integral continued}}
+
+  {\boldmath \bfseries Last time:} $U(f, \Pi)$ and $L(f, \Pi)$ are the upper and lower Darboux sums.
+  Note that 
+  \[
+    \forall \, \Pi, \Pi': L(f, \Pi) \leq U(f, \Pi').
+  \]
+  
+  Then 
+  \[
+    \overline{\int_a^b} f(x)\ dx = \inf \left \{ U(f, \Pi) : \text{$\Pi$ partition} \right \}
+  \]
+  and 
+  \[
+    \underline{\int_a^b} f(x)\ dx = \sup \left \{ L(f, \Pi) : \text{$\Pi$ partition} \right \}
+  \]
+  obey
+  \[
+    \underline{\int_a^b} f(x)\ dx \leq \overline{\int_a^b} f(x)\ dx.
+  \]
+  
+  \newpage
+  
+  \begin{defn}
+    $f \colon [a, b] \to \mathbb R$ bounded is {\boldmath \bfseries Darboux integrable} if 
+    \[
+      \underline{\int_a^b} f(x)\ dx = \overline{\int_a^b} f(x)\ dx.
+    \]
+  \end{defn}
+  
+  \begin{lem}
+    For every $f \colon [a, b] \to \mathbb R$: 
+    \[
+      \text{$f$ Darboux integrable} \Leftrightarrow \forall \, \varepsilon > 0 \, \exists \, \Pi \text{ partition}: U(f, \Pi) - L(f, \Pi) < \varepsilon.
+    \]
+  \end{lem}
+  
+  \begin{prf}
+    By definition, 
+    \[
+      \forall \, \varepsilon > 0 \, \exists \, \Pi, \tilde \Pi: U(f, \Pi) < \overline{\int_a^b} f(x)\ dx + \varepsilon \quad \land \quad L(f, \tilde \Pi) > \underline{\int_a^b} f(x)\ dx - \varepsilon.
+    \]
+    
+    Then 
+    \[
+      U(f, \Pi \cup \tilde \Pi) - L(f, \Pi \cup \tilde \Pi) \leq U(f, \Pi) - L(f, \tilde \Pi) \leq \overline{\int_a^b} f(x)\ dx - \underline{\int_a^b} f(x)\ dx + 2 \varepsilon.
+    \]
+    
+    Then the equality of the Darboux integrals implies the left to right direction of the lemma.
+    
+    For the converse, 
+    \[
+      0 \leq \overline{\int_a^b} f(x)\ dx - \underline{\int_a^b} f(x)\ dx \leq U(f, \Pi) - L(f, \Pi) < \varepsilon.
+    \]
+  \end{prf}
+  
+  \begin{lem}
+    Let $\Pi$ and $\Pi'$ be unmarked partitions.
+    Then 
+    \[
+      U(f, \Pi') \geq U(f, \Pi) - 2 \left | \Pi' \right | ||\Pi|| ||f||
+    \]
+    and 
+    \[
+      L(f, \Pi') \leq L(f, \Pi) + 2 \left | \Pi' \right | ||\Pi|| ||f||.
+    \]
+    where $||f|| := \sup_{x \in [a, b]} \left | f(x) \right |$.
+  \end{lem}
+  
+  \begin{prf}
+    Note that 
+    \[
+      U(f, \Pi') \geq U(f, \Pi \cup \Pi')
+    \]
+    and for $f \geq 0$, dropping intervals of $\Pi$ that receive points in $\Pi'$ from $U(f, \Pi)$ changes the result by at most $2 \left | \Pi' \right | ||\Pi|| ||f||$.
+  \end{prf}
+  
+  \newpage
+  
+  \begin{thm}
+    For every $f \colon [a, b] \to \mathbb R$ bounded: 
+    \[
+      \text{$f$ Riemann integrable} \Leftrightarrow \text{$f$ Darboux integrable}.
+    \]
+    
+    If both are true then 
+    \[
+      \int_a^b f(x)\ dx = \underline{\int_a^b} f(x)\ dx = \overline{\int_a^b} f(x)\ dx.
+    \]
+  \end{thm}
+  
+  \begin{prf}
+    $\Rightarrow$: RI means that 
+    \[
+      \exists \, L \in \mathbb R \, \exists \, \delta > 0 \, \forall \, \Pi \text{ partition with $||\Pi|| < \delta$}: \left | R(f, \Pi) - L \right | < \varepsilon.
+    \]
+    
+    Pick $N \in \mathbb N$ such that $N > (b - a) / \delta$, define $\Pi = \left \{ t_i \right \}_{i = 1}^n$ such that $t_i - t_{i - 1} = \frac{b - a}{N} < \delta$. 
+    Now pick $t^*_i \in [t_{i - 1}, t_i]$ such that 
+    \[
+      f(t^*_i) \geq \sup \left \{ f(x) : x \in [t_{i - 1}, t_i] \right \} - \frac{\varepsilon}{b - a}
+    \]
+    and $\tilde{t^*_i} \in [t_{i - 1}, t_i]$ such that 
+    \[
+      f(\tilde{t^*_i}) \leq \inf \left \{ f(x) : x \in [t_{i - 1}, t_i] \right \} + \frac{\varepsilon}{b - a}.
+    \]
+    Then let $\Pi$ be the partition with marked points $\left \{ t^*_i \right \}_{i = 1}^N$ and $\tilde \Pi$ be the partition with marked points $\left \{ \tilde{t^*_i} \right \}_{i = 1}^N$.
+
+    Then 
+    \[
+      U(f, \Pi) \leq \sum_{i = 1}^N \left ( f(t^*_i) + \frac{\varepsilon}{b - a} \right ) (t_i - t_{i - 1}) = R(f, \Pi) + \varepsilon
+    \]
+    and 
+    \[
+      L(f, \tilde \Pi) \geq \sum_{i = 1}^n \left ( f(\tilde{t^*_i} - \frac{\varepsilon}{b - a}) \right ) (t_i - t_{i - 1}) = R(f, \tilde \Pi) - \varepsilon.
+    \]
+    Now 
+    \begin{align*}
+      U(f, \Pi \cup \tilde \Pi) - L(f, \Pi \cup \tilde \Pi) &\leq U(f, \Pi) - L(f, \tilde \Pi) \\ 
+      &\leq R(f, \Pi) - R(f, \tilde \Pi) + 2 \varepsilon \\ 
+      &\leq \left | R(f, \Pi) - L \right | + \left | R(f, \tilde \Pi) - L \right | + 2 \varepsilon \\ 
+      &\leq 4 \varepsilon.
+    \end{align*}
+    
+    $\Leftarrow$: $\forall \, \varepsilon > 0 \exists \, \Pi' \text{ partition such that } U(f, \Pi') - L(f, \Pi') < \varepsilon$.
+    Pick any $\Pi$ and $\tilde \Pi$ marked partitions with $||\tilde \Pi||, ||\Pi|| < \delta := \varepsilon / (\left | \Pi' \right | ||f||) \quad (f \neq 0)$.
+    
+    Then 
+    \[
+      R(f, \Pi) \leq U(f, \Pi) \overset{\text{by Lemma~\ref{lem:10.3}}}{\leq} U(f, \Pi') + 2 \underbrace{\left | \Pi' \right | ||\Pi|| ||f||}_{\leq \varepsilon}
+    \]
+    and 
+    \[
+      R(f, \tilde \Pi) \geq L(f, \tilde \Pi) \overset{\text{by Lemma~\ref{lem:10.3}}}{\geq} L(f, \Pi') - 2 \underbrace{\left | \Pi' \right | ||\tilde \Pi|| ||f||}_{\leq \varepsilon}.
+    \]
+    
+    Then 
+    \[
+      \left | R(f, \tilde \Pi) - R(f, \tilde \Pi) \right | \leq U(f, \Pi') - L(f, \Pi') + 4 \varepsilon \leq 5 \varepsilon.
+    \]
+    
+    Let $\left \{ \Pi_n \right \}$ be an arbitrary sequence of marked partitions such that 
+    \[
+      ||\Pi_n|| \to 0 \quad \land \quad L := \lim_{n \to \infty} R(f, \Pi_n) \text{ exists}.
+    \]
+    This exists by Bolzano-Weierstrass theorem.
+    
+    Then 
+    \[
+      \left | R(f, \Pi) - L \right | \leq \left | R(f, \Pi_n) - L \right | + \left | R(f, \Pi) - R(f, \Pi_n) \right | \underset{\text{once } ||\Pi_n|| < \delta}{\leq} \left | R(f, \Pi_n) - L \right | + 5 \varepsilon \underset{n \to \infty}{\longrightarrow} 5 \varepsilon.
+    \]
+    
+    Then we showed that 
+    \[
+      \exists \, L \in \mathbb R \, \forall \, \varepsilon > 0 \, \exists \, \delta > 0 \, \forall \, \Pi \text{ marked partition}: ||\Pi|| < \delta \Rightarrow \left | R(f, \Pi) - L \right | \leq 5 \varepsilon.
+    \]
+  \end{prf}
+  
+  \begin{cor}
+    Let $f \colon [a, b] \to \mathbb R$ be bounded.
+    Then 
+    \[
+      \text{$f$ is RI} \Leftrightarrow \forall \, \varepsilon > 0 \, \exists \, \Pi = \left \{ t_i \right \}_{i = 1}^n \text{ unmarked partition}: \sum_{i = 1}^N \operatorname{osc}(f, [t_{i - 1}, t_i])(t_i - t_{i - 1}) < \varepsilon
+    \]
+    where $\operatorname{osc}(f, A) = \sup_{x \in A} f(x) - \inf_{x \in A} f(x)$
+  \end{cor}
+  
+  \begin{eg}
+    The dirichlet function 
+    \[
+      f(x) = \begin{cases}
+        1 & x \in \mathbb Q \\ 
+        0 & x \not \in \mathbb Q
+      \end{cases}
+    \]
+    is not RI.
+  \end{eg}
+  
+  \begin{eg}
+    The function 
+    \[
+      f(x) = \begin{cases}
+        \frac{1}{n + 1} & x = q_n \\ 
+        0 & x \not \in \mathbb Q
+      \end{cases}
+    \]
+    is note RI.
+  \end{eg}
 \end{document}
