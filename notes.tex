@@ -141,7 +141,7 @@
   
   \underline{\boldmath \bfseries Limits of functions}
   
-  Last time we showed that monotone functions have no discontinuities of second time.
+  Last time we showed that monotone functions have no discontinuities of second kind.
 
   \begin{lem}
     Let $f \colon \mathbb R \to \mathbb R$ be monotone.
@@ -1185,6 +1185,170 @@
         0 & x \not \in \mathbb Q
       \end{cases}
     \]
-    is note RI.
+    is not RI.
   \end{eg}
+  
+  \section{4.15 Friday Week 3}
+  
+  {\boldmath \bfseries \underline{Riemann Integrability - criteria and characterization}}
+  
+  {\boldmath \bfseries Last time:} $\forall \, f \colon [a, b] \to \mathbb R$ bounded, 
+  \[
+    \text{$f$ RI} \Leftrightarrow \forall \, \varepsilon > 0 \, \exists \, \Pi = \left \{ t_i \right \}_{i = 1}^n \text{ partition of $[a, b]$}: \sum_{i = 1}^n \operatorname{osc}(f, [t_{i - 1}, t_i]) \left | t_i - t_{i - 1} \right | < \varepsilon
+  \]
+  where 
+  \begin{align*}
+    \operatorname{osc}(f, A) &:= \sup \left \{ \left | f(y) - f(x) \right | : x, y \in A \right \} \\ 
+    &= \sup_{x \in A} f(x) - \inf_{x \in A} f(x) (A \neq \varnothing).
+  \end{align*}
+  
+  \begin{lem}
+    Let $f, g \colon [a, b] \to \mathbb R$.
+    Then 
+    \begin{enumerate}
+      \item $\text{$f$ RI} \Rightarrow \text{$\left | f \right |$ RI}$ and 
+
+      \item $\text{$f$, $g$ RI} \Rightarrow \text{$f \cdot g$ RI}$.
+    \end{enumerate}
+  \end{lem}
+  
+  \begin{prf}
+    Note that 
+    \[
+      \left | \left | f \right |(x) - \left | f \right |(y) \right | = \left | \left | f(x) \right | - \left | f(y) \right | \right | \leq \left | f(x) - f(y) \right |.
+    \]
+    Then 
+    \[
+      \operatorname{osc}(f, A) \leq \operatorname{osc}(\left | f \right |, A).
+    \]
+    Then 
+    \[
+      \text{$f$ RI} \Rightarrow \text{$\left | f \right |$ RI}.
+    \]
+    Note that a counterexample for the converse is Dirichlet's function.
+  \end{prf}
+  
+  \begin{thm}
+    For all $f \colon [a, b] \to \mathbb R$ we have 
+    \[
+      \text{$f$ continuous} \Rightarrow \text{$f$ RI}.
+    \]
+  \end{thm}
+  
+  \begin{prf}
+    Note that $[a, b]$ compact and $f$ continuous implies that $f$ is uniformly continuous.
+    Then for all $\varepsilon > 0$ there exists $\delta > 0$ such that for all $s, t \in [a, b]$ we have 
+    \[
+      0 < \left | s - t \right | < \delta \Rightarrow \operatorname{osc}(f, [s, t]) < \frac{\varepsilon}{b - a}.
+    \]
+    Then for all 
+    \[
+      \forall \, \Pi: ||\Pi|| < \delta \Rightarrow \sum_{i = 1}^n \operatorname{osc}(f, [t_{i - 1}, t_i]) (t_i - t_{i - 1}) \leq \sum_{i = 1}^n \frac{\varepsilon}{b - a} (t_i - t_{i - 1}) \leq \varepsilon.
+    \]
+  \end{prf}
+  
+  \begin{lem}
+    Let $f \colon [a, b] \to \mathbb R$ be bounded and such that $f$ has only finitely many discontinuities.
+    Then $f$ is RI.
+  \end{lem}
+  
+  \begin{prf}
+    Let $x_1, \dots, x_m$ enumerate discontinuity points of $f$.
+    Pick $\varepsilon > 0$.
+    Suppose without loss of generality $||f|| \neq 0$.
+    Let $\delta < \frac{\varepsilon}{m ||f||}$.
+    Then 
+    \[
+      \operatorname{osc}(f, [x_i - \delta, x_i + \delta] \cap [a, b]) \leq 2 ||f||.
+    \]
+    Next, note that $[a, b] \setminus \bigcup_{i = 1}^m (x_i - \delta, x_i + \delta)$ is closed and thus compact.
+    Then $f$ is uniformly continuous on this set.
+    Then there exists $\delta' > 0$ such that for all $[s, t] \subseteq $ this set we have 
+    \[
+      0 < \left | s - t \right | \leq \delta' \Rightarrow \operatorname{osc}(f, [s, t]) \leq \frac{\varepsilon}{b - a}.
+    \]
+    Now partition $[a, b] \setminus \bigcup_{i = 1}^n (x_i - \delta, x_i + \delta)$ into intervals of length $\leq \delta'$.
+    Combine them with intervals $[x_i - \delta, x_i + \delta]$.
+    Now take $\Pi = $ setof endpoints of these intervals.
+    Then 
+    \[
+      \sum_{i = 1}^n \operatorname{osc}(f, [t_{i - 1}, t_i]) (t_i - t_{i - 1}) \leq m \cdot 2 ||f|| \cdot 2 \delta + \frac{\varepsilon}{b - a} (b - a) \leq 5 \varepsilon.
+    \]
+  \end{prf}
+  
+  \begin{lem}
+    Let $f \colon [a, b] \to \mathbb R$ be bounded.
+    \[
+      \text{$f$ has no discontinuities of second kind} \Rightarrow \text{$f$ RI}.
+    \]
+  \end{lem}
+  
+  \begin{prf}
+    Key idea: 
+    \[
+      \forall \, \eta > 0: \left \{ x \in (a, b) : \operatorname{diam}\{ \lim_{z \to x^+} f(z), \lim_{z \to x^-} f(z), f(x) \} > \eta \right \} \text{ is finite}.
+    \]
+  \end{prf}
+  
+  \begin{eg}
+    \[
+      f(x) = \begin{cases}
+        \frac{1}{n + 1} & x = q_n \\ 
+        0 & x \not \in \mathbb Q.
+      \end{cases}
+    \]
+  \end{eg}
+  
+  {\boldmath \bfseries It gets worse:} Let 
+  \[ 
+    C := \left \{ \sum_{i \in \mathbb N} \frac{2 \sigma_i}{3^{i + 1}} : \left \{ \sigma_i \right \}_{i \in \mathbb N} \in \left \{ 0, 1 \right \}^\mathbb N \right \}
+  \]
+  be Cantor's ternary set.
+
+  Then $C = \bigcap_{n \in \mathbb N} C_n$ where 
+  \[
+    C_n = \left \{ \sum_{i = 1}^n \frac{\sigma_i}{3^{i + 1}} + [0, 3^{-n - 1}] : \sigma_1, \dots, \sigma_n \left \{ 0, 1 \right \} \right \}.
+  \]
+  
+  \begin{lem}
+    The function 
+    \[
+      1_C(x) = \begin{cases}
+        1 & x \in C \\ 
+        0 & x \not \in C
+      \end{cases}
+    \]
+    is RI.
+  \end{lem}
+  
+  \begin{prf}
+    Let $I_1, \dots, I_{2 n}$ be intervals constituting $C_n$.
+    Define 
+    \[
+      J_k = \left \{ x \in [0, 1] : \operatorname{dist}(x, I_k) < \frac{1}{3^{n + 1}} \right \}.
+    \]
+    Then 
+    \[
+      \operatorname{length}(J_k) = \operatorname{length}(I_k) + 2 \cdot \frac{1}{3^{n + 3}} \leq \frac{1}{3^n}.
+    \] 
+    Take $\Pi$ to be the endpoints of $\left \{ J_k \right \}_{k = 1}^{2 n}$.
+    Then 
+    \[
+      \sum_{i = 1}^m \operatorname{osc}(f, [t_{i - 1}, t_i]) \left | t_i - t_{i - 1} \right | \leq \sum_{k = 1}^{2^n} \operatorname{length}(J_k) \leq 2^n \cdot \frac{1}{3^n} \underset{n \to \infty}{\longrightarrow} 0.
+    \]
+  \end{prf}
+  
+  \begin{defn}
+    A set $A \subseteq \mathbb R$ is of {\boldmath \bfseries zero length} if 
+    \[
+      \forall \, \varepsilon > 0 \, \exists \, \left \{ (a, b) \right \}_{i \in \mathbb N} \text{ intervals}: A \subseteq \bigcup_{i \in \mathbb N} (a, b) \quad \land \quad \sum_{i \in \mathbb N} (b_i - a_i) < \varepsilon.
+    \]
+  \end{defn}
+  
+  \begin{thm}[Lebesgue]
+    For all bounded $f \colon [a, b] \to \mathbb R$ we have 
+    \[
+      \text{$f$ is RI} \Leftrightarrow \left \{ x \in [a, b] : \text{$f$ is discontinuous at $x$} \right \} \text{ has zero length}.
+    \]
+  \end{thm}
 \end{document}
