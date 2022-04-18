@@ -1338,17 +1338,114 @@
     \]
   \end{prf}
   
+  \section{4.18 Monday Week 4}
+  
+  {\boldmath \bfseries \underline{Characterizing Riemann integrability}}
+  
+  Sufficient conditions for RI: continuity, finite number of discontinuities, no discontinuities of second kind.
+
+  Necessary condition for RI: boundedness.
+  
   \begin{defn}
     A set $A \subseteq \mathbb R$ is of {\boldmath \bfseries zero length} if 
     \[
-      \forall \, \varepsilon > 0 \, \exists \, \left \{ (a, b) \right \}_{i \in \mathbb N} \text{ intervals}: A \subseteq \bigcup_{i \in \mathbb N} (a, b) \quad \land \quad \sum_{i \in \mathbb N} (b_i - a_i) < \varepsilon.
+      \forall \, \varepsilon > 0 \, \exists \, \left \{ (a_i, b_i) \right \}_{i \in \mathbb N} \text{ intervals}: A \leq \bigcup_{i \in \mathbb N} (a_i, b_i) \quad \land \quad \sum_{i \in \mathbb N} (b_i - a_i) < \varepsilon.
     \]
   \end{defn}
   
-  \begin{thm}[Lebesgue]
-    For all bounded $f \colon [a, b] \to \mathbb R$ we have 
+  \begin{lem}
+    In the definition of zero length, closed intervals can be used.
+  \end{lem}
+  
+  \begin{prf}
+    If $A \subseteq \bigcup_{i \in \mathbb N} [a_i, b_i]$, let $\tilde{a_i} = a_i - \varepsilon / 2^i$ and $\tilde{b_i} = b_i + \varepsilon / 2^i$.
+    Then 
     \[
-      \text{$f$ is RI} \Leftrightarrow \left \{ x \in [a, b] : \text{$f$ is discontinuous at $x$} \right \} \text{ has zero length}.
+      A \subseteq \bigcup_{i \in \mathbb N} (\tilde{a_i}, \tilde{b_i})
+    \]
+    and 
+    \[
+      \sum_{i \in \mathbb N} (\tilde{b_i} - \tilde{a_i}) = \sum_{i \in \mathbb N} (b_i - a_i) + \sum_{i \in \mathbb N} 2 \cdot \frac{\varepsilon}{2^i} = \sum_{i \in \mathbb N} (b_i - a_i) + 4 \varepsilon.
+    \]
+  \end{prf}
+  
+  \begin{lem}
+    Let $f \colon \mathbb R \to \mathbb R$ be bounded.
+    Set 
+    \[ 
+      M_f(x) = \inf_{\delta > 0} \sup_{z : \left | z - x \right | < \delta} f(z)
+    \]
+    and 
+    \[
+      m_f(x) = \sup_{\delta > 0} \inf_{z : \left | z - x \right | < \delta} f(z).
+    \]
+    Then 
+    \begin{enumerate}
+      \item $\forall \, x \in \mathbb R: \text{$f$ continuous at $x$} \Leftrightarrow M_f(x) = m_f(x)$, 
+        
+      \item $\forall \, x \in \mathbb R \, \forall \, \delta: \max \left \{ \operatorname{osc}(f, [x - \delta, x]), \operatorname{osc}(f, [x - \delta, x]) \right \} \geq M_f(x) - m_f(x)$, and 
+        
+      \item $\forall \, x \in \mathbb R: \lim_{\delta \to 0} \operatorname{osc}(f, [x - \delta, x + \delta]) = M_f(x) - m_f(x)$.
+    \end{enumerate}
+  \end{lem}
+  
+  \begin{thm}[Lebesgue's characterization of Riemann integrability]
+    Let $f \colon [a, b] \to \mathbb R$ be bounded.
+    Then 
+    \[
+      f \text{ RI} \Leftrightarrow \left \{ x \in [a, b] : \text{$f$ discontinuous at $x$} \right \} \text{ is zero length}.
     \]
   \end{thm}
+  
+  \begin{prf}
+    $\Rightarrow$: Let $f \colon [a, b] \to \mathbb R$ be bounded and RI.
+    
+    Pick $\varepsilon > 0$.
+    Then RI implies 
+    \[
+      \forall \, n \in \mathbb N \, \exists \, \Pi = \left \{ t_i^n \right \}_{i = 1}^{m(n)} \text{ partition of $[a, b]$}: \sum_{i = 1}^{m(n)} \operatorname{osc}(f, [t_{i - 1}^n, t_i^n]) (t_i^n - t_{i - 1}^n) < \varepsilon 4^{-n}.
+    \]
+    Set $I_n := \left \{ i = 1, \dots, m(n) : \operatorname{osc}(f, [t_{i - 1}^n, t_i^n]) > 2^{-n} \right \}$.
+    Then 
+    \[
+      \sum_{i \in I_n} (t_i^n - t_{i - 1}^n) \overset{\text{Markov's inequality}}{\leq} \sum_{i \in I_n} \frac{\operatorname{osc}(f, [t_{i - 1}^n, t_i^n])}{2^{-n}} (t_i^n - t_{i - 1}^n) \leq 2^n \sum_{i = 1}^{m(n)} \operatorname{osc}(f, [t_{i - 1}^n, t_i^n]) (t_i^n - t_{i - 1}^n) \leq 2^n \cdot 4^{-n} = \varepsilon 2^{-n}.
+    \]
+    Now 
+    \[
+      \left \{ x \in [a, b] : M_f(x) \neq m_f(x) \right \} \subseteq \bigcup_{n \geq 1} \bigcup_{i \in I_n} [t_{i - 1}^n, t_i^n].
+    \]
+    Then  
+    \[
+      \sum_{n \geq 1} \sum_{i \in I_n} (t_i^n - t_{i - 1}^n) \leq \sum_{n \geq 1} \varepsilon 2^{-n} = \varepsilon.
+    \]
+    Then $f$ RI $\Rightarrow$ $\left \{ x \in [a, b] : M_f(x) \neq m_f(x) \right \}$ is zero length.
+    
+    $\Leftarrow$: Let $\varepsilon > 0$ and let $\left \{ J_i \right \}_{i \in \mathbb N}$ be open intervals such that 
+    \[
+      \left \{ x \in [a, b] : M_f(x) \neq m_f(x) \right \} \subseteq \bigcup_{i \in \mathbb N} J_i \quad \land \quad \sum_{ i \in \mathbb N} \operatorname{length}(J) < \frac{\varepsilon}{2 \varepsilon ||f||} (f \neq 0).
+    \]
+    Since $M_f(x) = m_f(x) \Rightarrow x$ is continuous: 
+    \[
+      \forall \, x \in [a, b]: M_f(x) = m_f(x) \Rightarrow \exists \, \delta_x > 0: \operatorname{osc(f, (x - \delta x, x + \delta x)} < \frac{\varepsilon}{b - a}.
+    \]
+    Then intervals $\left \{ J_i \right \}_{i \in \mathbb N} \cup \left \{ (x - \delta, x + \delta) : M_f(x) = m_f(x) \right \}$ cover $[a, b]$.
+    Then by Heme-Bord theorem, 
+    \[
+      \exists \, m, n \in \mathbb N \, \exists \, x_0, \dots, x_m \in \left \{ x \in [a, b] : M_f(x) = m_f(x)) \right \}: [a, b] \subseteq \bigcup_{i = 0} J_i \cup \bigcup_{j = 0}^m (x_j - \delta_{x_j}, x_j + \delta_{x_j}).
+    \]
+    Let $\Pi = \left \{ t_i \right \}_{i = 1}^N$ be a partition containing of all endpoints of the intervals $(x_j - \delta_{x_j}, x_j + \delta_{x_j})$.
+    Let $k = \left \{ i = 1, \dots, N : [t_{i - 1}, t_i] \subseteq \bigcup_{j = 1}^m (x_j - \delta_{x_j}, x_j + \delta_{x_j}) \right \}$.
+    Then 
+    \[
+      \forall \, i \in K: \operatorname{osc}(f, [t_{i - 1}, t_i]) < \frac{\varepsilon}{b - a}
+    \]
+    and 
+    \[
+      \sum_{i \not \in K} \operatorname{osc}(f, [t_{i - 1}, t_i]) \leq 2 ||f|| \cdot \sum_{i \not \in K} (t_i - t_{i - 1}) < 2 ||f|| \sum_{i \in \mathbb N} \operatorname{length}(J_i) < \varepsilon.
+    \]
+    Then 
+    \[
+      \sum_{i = 1}^n \operatorname{osc}(f, [t_{i - 1}, t_i]) (t_i - t_{i - 1}) \leq \sum_{i \in K} \operatorname{osc}(f, [t_{i - 1}, t_i]) (t_i - t_{i - 1}) + \sum_{i \not \in K} \operatorname{osc}(f, [t_{i - 1}, t_i]) (t_i - t_{i - 1}) \leq \frac{\varepsilon}{b - a} (b - a) + \varepsilon = 2 \varepsilon. 
+    \]
+  \end{prf}
 \end{document}
