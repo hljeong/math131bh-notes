@@ -758,13 +758,13 @@
   \begin{prf}
     Given $\varepsilon > 0$, pick $\delta > 0$ such that $|| \Pi || < \delta$ implies 
     \[
-      \left | R(f, \Pi) - \int_a^b f(x)\ dx \right | < \varepsilon \land \left | R(g, \Pi) - \int_a^b g(x)\ dx \right |.
+      \left | R(f, \Pi) - \int_a^b f(x)\ dx \right | < \varepsilon \land \left | R(g, \Pi) - \int_a^b g(x)\ dx \right | < \varepsilon.
     \]
     
     Since $R(\alpha f + \beta g, \Pi) = \alpha R(f, \Pi) + \beta R(g, \Pi)$, 
     \begin{align*}
       &\left | R(\alpha f + \beta g, \Pi) - \alpha \int_a^b f(x)\ dx - \beta \int_a^b g(x)\ dx \leq \left | \alpha \right | \right | \\ 
-      &\quad \leq \alpha \left | R(f, \Pi) - \int_a^b f(x)\ dx \right | + \left | \beta \right | \left | R(g, \Pi) - \int_a^b g(x)\ dx \right | \\ 
+      &\quad \leq \left | \alpha \right | \left | R(f, \Pi) - \int_a^b f(x)\ dx \right | + \left | \beta \right | \left | R(g, \Pi) - \int_a^b g(x)\ dx \right | \\ 
       &\quad \leq (\left | \alpha \right | + \left | \beta \right |) \varepsilon.
     \end{align*}
   \end{prf}
@@ -1185,7 +1185,7 @@
         0 & x \not \in \mathbb Q
       \end{cases}
     \]
-    is not RI.
+    is RI.
   \end{eg}
   
   \section{4.15 Friday Week 3}
@@ -1446,6 +1446,193 @@
     Then 
     \[
       \sum_{i = 1}^n \operatorname{osc}(f, [t_{i - 1}, t_i]) (t_i - t_{i - 1}) \leq \sum_{i \in K} \operatorname{osc}(f, [t_{i - 1}, t_i]) (t_i - t_{i - 1}) + \sum_{i \not \in K} \operatorname{osc}(f, [t_{i - 1}, t_i]) (t_i - t_{i - 1}) \leq \frac{\varepsilon}{b - a} (b - a) + \varepsilon = 2 \varepsilon. 
+    \]
+  \end{prf}
+  
+  \section{4.20 Wednesday Week 4}
+
+  {\boldmath \bfseries \underline{Derivative vs. integral, FTC, \dots}}
+
+  {\boldmath \bfseries Last time:} $\text{$f$ RI} \Leftrightarrow \left \{ x \in [a, b] : \text{$f$ discnotinuous at $x$} \right \} \text{ is of zero length}$.
+  
+  \begin{cor}
+    \[
+      \text{f RI} \land \left \{ x \in [a, b] : g(x) \neq f(x) \right \} \text{ is of zero length} \Rightarrow \text{$g$ RI} \land \int_a^b g(x)\ dx = \int_a^b f(x)\ dx.
+    \]
+  \end{cor}
+  
+  {\boldmath \bfseries Today:} Newton / Leibniz FTC: 
+  \[
+    \frac{d}{dx} \int_a^x f(t)\ dt = f(x) \quad \land \quad \int_a^b \frac{d}{dx} f(t)\ dt = f(b) - f(a).
+  \]
+  
+  \begin{note}
+    These are not true without conditions.
+  \end{note}
+  
+  \begin{lem}
+    Let $a < b$ be reals and $f \colon [a, b] \to \mathbb R$ be an RI function on $[a, b]$.
+    Set $F(x) = \int_a^x f(t)\ dt$.
+    Then $F$ is Lipschitz continuous.
+  \end{lem}
+  
+  \begin{prf}
+    If $a \leq x < y \leq b$ then additivity implies 
+    \[
+      F(y) - F(x) = \int_0^y f(t)\ dt - \int_0^x f(t)\ dt = \int_x^y f(t)\ dt.
+    \]
+    
+    Note that $\text{$f$ RI} \Rightarrow \text{$f$ bounded}$.
+    Then 
+    \[
+      \left | F(y) - F(x) \right | = \left | \int_x^y f(t)\ dt \right | \leq ||f|| \cdot \left | y - x \right |.
+    \]
+  \end{prf}
+  
+  \begin{eg}
+    \[
+      \left | x \right | = \int_0^x t (1_{[0, \infty)} - 1_{(-\infty, 0)})\ dt.
+    \]
+  \end{eg}
+  
+  {\boldmath \bfseries Q:} Is every Lipschitz function a Riemann integral?
+  
+  \begin{lem}
+    Let $f$ be RI on $[a, b]$.
+    Set $F(x) = \int_a^b f(t)\ dt$.
+    Then 
+    \[
+      \forall \, x \in (a, b): \text{$f$ continuous at $x$} \Rightarrow \text{$F'(x)$ exists} \land F'(x) = f(x).
+    \]
+  \end{lem}
+  
+  \begin{prf}
+    Let $y \in (x, b)$.
+    Then 
+    \[
+      F(y) - F(x) - f(x) (y - x) = \int_x^y (f(t) - f(x))\ dt.
+    \]
+    Then 
+    \[
+      \left | \frac{F(y) - F(x)}{y - x} - f(x) \right | \leq \sup_{t \in [x, y]} \left | f(y) - f(x) \right | \underset{y \to x^+}{\longrightarrow} 0 \text{ by right continuity of $f$}.
+    \]
+    
+    Then $F'^+(x) = f(x)$.
+    Similarly, $F'^-(x) = f(x)$.
+  \end{prf}
+  
+  \begin{eg}
+    \[
+      f(x) = 1_{1 / (n + 1), n \in \mathbb N}.
+    \]
+    Note that $F(x) = 0$ for all $x \in \mathbb R$.
+  \end{eg}
+  
+  \begin{cor}[Fundamental theorem of calculus I]
+    Let $f \colon [a, b] \to \mathbb R$ be continuous.
+    Then 
+    \[
+      \forall \, x \in (a, b): \frac{d}{dx} \int_a^x f(t)\ dt = f(x).
+    \]
+  \end{cor}
+  
+  \begin{note}
+    \begin{itemize}
+      \item The integral is an antiderivative / primitive function.
+      Notation $\int f(t)\ dt$; 
+  
+      \item $\frac{d}{dt} \int_x^b f(t)\ dt = - f(x)$; 
+      
+      \item $\frac{d}{dx} \int_{g(x)}^{h(x)} = f(h(x)) h'(x) - f(g(x)) g'(x)$.
+    \end{itemize}
+  \end{note}
+  
+  \begin{thm}
+    Let $f \colon [a, b]\to \mathbb R$ be continuous on $[a, b]$ and differentiable on $(a, b)$.
+    (Choose $f'(a)$, $'(b)$) arbitrarily.
+    Then 
+    \[
+      \text{ $f$ RI} \Rightarrow \int_a^b f'(t)\ dt = f(b) - f(a).
+    \]
+  \end{thm}
+  
+  \begin{prf}
+    Let $\varepsilon > 0$.
+    Then $f'$ RI implies 
+    \[
+      \exists \, \delta > 0 \, \forall \, \Pi: ||\Pi|| < \varepsilon \Rightarrow \left | R(f', \Pi) - \int_a^b f'(t)\ dt \right | < \varepsilon.
+    \]
+    Pick $n \in \mathbb N$ such that $n \delta > (b - a)$.
+    Set $t_i := a + \frac{i}{n} (b - a)$ where $i = 0, \dots, n$.
+
+    Then, by the mean value theorem, for all $i = 1, \dots, n$ we have 
+    \[
+      \exists \, t_i^* \in (t_{i - 1}, t_i): f(t_i) - f(t_{i - 1}) = f'(t_i^*) (t_i - t_{i - 1}).
+    \]
+    
+    Let $\Pi := (\left \{ t_i \right \}, \left \{ t_i^* \right \})$.
+    Then 
+    \[
+      f(b) - f(a) = \sum_{i = 1}^n (f(t_i) - f(t_{i - 1})) = \sum_{i = 1^n} f'(t_i^*) (t_i - t_{i - 1}) = R(f', \Pi).
+    \]
+    Then 
+    \[
+      \left | f(b) - f(a) - \int_a^b f'(t)\ dt \right | < \varepsilon.
+    \]
+  \end{prf}
+  
+  {\boldmath \bfseries \underline{Volterra's example}}
+
+  \[
+    \exists \, F \colon [0, 1] \to \mathbb R \text{ continuous}: \text{$F'(x)$ exists for all $x \in [0, 1]$} \land \text{$F'$ bounded} \land \text{$F'$ is not RI}.
+  \]
+  
+  This is a major deficiency in Riemann's theory that led Lebesgue to the formulation of the Lebesgue integral.
+  
+  \begin{cor}[Integration by parts]
+    Let $f, g \colon [a, b] \to \mathbb R$ be continuous on $[a, b]$ and differentiable on $(a, b)$.
+    Then 
+    \[
+      \text{$f' g$ RI} \land \text{$f g'$ RI} \Rightarrow \int_0^b f'(x) g(x)\ dx = f(b) g(b) - f(a) g(a) - \int_a^b f(x) g'(x)\ dx.
+    \]
+  \end{cor}
+  
+  \begin{prf}
+    Note that 
+    \[
+      \text{$f' g$ RI} \land \text{$g' f$ RI} \Rightarrow \text{$(f g)'$ RI}.
+    \]
+    Then 
+    \[
+      f(b) g(b) - f(a) g(a) = \int_a^b (f g)'(x)\ dx = \int_a^b f'(x) g(x)\ dx + \int_a^b f(x) g'(x)\ dx.
+    \]
+  \end{prf}
+  
+  \begin{cor}
+    Let $f \colon [c, d] \to \mathbb R$ and $\varphi \colon [a, b] \to \mathbb R$ be functions.
+    Assume 
+    \begin{enumerate}
+      \item $\varphi$ is continuous on $[a, b]$ and differentiable on $(a, b)$, 
+
+      \item $f$ is continuous on $[c, d]$, and
+
+      \item $(f \circ \varphi) \varphi'$ is RI on $[a, b]$.
+    \end{enumerate}
+    Then 
+    \[
+      \int_{\varphi(a)}^{\varphi(b)} f(x)\ dx = \int_a^b (f \circ \varphi)(t) \varphi'(t)\ dt.
+    \]
+  \end{cor}
+  
+  \begin{prf}
+    Note that 
+    \[
+      F(x) = \int_a^x f(t)\ dt \overset{\text{FTC I}}{\Longrightarrow} F'(x) = f(x).
+    \]
+    
+    Then 
+    \[
+      \int_{\varphi(a)}^{\varphi(b)} f(t)\ dt \overset{\text{FTC II}}{=\joinrel=\joinrel=} F(\varphi(b)) - F(\varphi(a)) \overset{\text{FTC II}}{=\joinrel=\joinrel=} \int_a^b \frac{d}{dx} (F \circ \varphi)(x)\ dx = \int_a^b (f \circ \varphi)(x) \varphi'(x)\ dx.
     \]
   \end{prf}
 \end{document}
