@@ -1728,7 +1728,7 @@
 
       \item For $g(x) = x$, we get the Riemann integral.
         
-      \item If ``length'' of $[t, s]$ is given by $g(t - s)$, then $\int f\ dg$ corresponds to ``area'' with lengths in $\mathbb R$ measured using $g$.
+      \item If ``length'' of $[t, s]$ is given by $g(s) - g(t)$, then $\int f\ dg$ corresponds to ``area'' with lengths in $\mathbb R$ measured using $g$.
         
       \item In probability: $g = \text{cumulative distribution function of a random variable $x$}$ ($g(t) := P(x \leq t)$) then 
       \[
@@ -1739,6 +1739,152 @@
       \[
         \int_a^b f\ dg = \text{total money earned in time interval $[a, b]$.}
       \]
+      This shows $g$ may not be monotone.
     \end{itemize}
   \end{note}
+  
+  \newpage
+  
+  \section{4.27 Wednesday Week 5}
+  
+  {\boldmath \bfseries \underline{Stieljes integral}}
+
+  {\boldmath \bfseries Last time:} 
+  \[
+    S(f, dg, \Pi) = \sum_{i = 1}^n f(t^*_i) (g(t_i) - g(t_{i - 1}))
+  \]
+  \[
+    \int_a^b f\ dg := \lim_{||\Pi|| \to 0} S(f, dg, \Pi) \text{ wherever it exists.}
+  \]
+  
+  We call this the Stieljes integral in the Riemann sense.
+  
+  Notation: $RS(g, [a, b]) := \left \{ f \colon [a, b] \to \mathbb R : \int_a^b f\ dg \text{ exists} \right \}$ 
+  
+  \begin{lem}[Linearity]
+    Let $h \colon [a, b] \to \mathbb R$ be given.
+    Then 
+    \[
+      \forall \, f, g \in RS(h, [a, b]) \, \forall \, \alpha, \beta \in \mathbb R : \alpha f + \beta g \in RS(h, [a, b]) \land \int_a^b (\alpha f + \beta g)\ dh = \alpha \int_a^b f\ dh + \beta \int_a^b g\ dh.
+    \]
+  \end{lem}
+  
+  \begin{lem}[Additivity]
+    Let $g \colon [a, b] \to \mathbb R$ be given.
+    Then 
+    \[
+      \forall \, f \in RS(g, [a, b]) \, \forall \, c \in (a, b) : f \in RS(g, [a, b]) \land f \in RS(g, [c, b]) \land \int_a^b f\ dg = \int_a^c f\ dg + \int_c^b f\ dg.
+    \]
+  \end{lem}
+  
+  \begin{lem}
+    Let $f \in RS(g, [a, b])$.
+    Then 
+    \[
+      \left \{ x \in [a, b] : \text{$f$ discontinuous at $x$} \right \} \cap \left \{ x \in [a, b] : \text{$g$ discontinuous at $x$} \right \} = \varnothing.
+    \]
+
+    \begin{note}
+      $f \in RS(g, [a, b])$ need not be bounded on intervals where $g$ is constant.
+    \end{note}
+  \end{lem}
+  
+  \begin{defn}
+    We say $f$ is {\boldmath \bfseries generalized Stieljes integrable} with respect to $g$ if 
+    \begin{align*}
+      \exists \, L \in \mathbb R \, \forall \, \varepsilon > 0 \, \exists \, \delta > 0 \, \exists \, \Pi_\varepsilon \text{ unmarked partition} \, &\forall \, \Pi \text{ marked partition} : \\ 
+      &||\Pi|| < \delta \land \Pi_\varepsilon \subseteq \Pi \Rightarrow \left | S(f, dg, \Pi) - L \right | < \varepsilon.
+    \end{align*}
+  \end{defn}
+  
+  {\boldmath \bfseries \underline{Criteria for Stieljes integrability}}
+  
+  \begin{thm}[Reduction to Riemann integral]
+    Let $f, g \colon [a, b] \to \mathbb R$ be such that 
+    \begin{enumerate}
+      \item $f$ is Riemann integrable and 
+
+      \item $g$ is cnotinuous on $[a, b]$, differentiable on $(a, b)$ with $g'$ Riemann integrable.
+    \end{enumerate}
+    Then 
+    \[
+      f \in RS(g, [a, b]) \quad \land \quad \int_a^b f\ dg = \int_a^b f(x) g'(x)\ dx.
+    \]
+  \end{thm}
+  
+  \begin{prf}
+    Let $\Pi = (\left \{ t_i \right \}_{i = 0}^n, \left \{ t^*_i \right \}_{i = 1}^n)$ be a marked partition of $[a, b]$.
+    For each $i = 1, \dots, n$, let $\tilde t_i$ be a point such that $g(t_i) - g(t_{i - 1}) = g'(\tilde t_i) (t_i - t_{i - 1})$ given by the mean value theorem.
+    Let $\tilde \Pi = (\left \{ t_i \right \}_{i = 0}^n, \left \{ \tilde t_i \right \}_{i = 1}^n)$.
+    Then 
+    \begin{align*}
+      S(f, dg, \Pi) - R(f g', \Pi') &= \sum_{i = 1}^n f(t^*_i) (g(t_i) - g(t_{i - 1})) - \sum_{i = 1}^n f(\tilde t_i) g(\tilde t_i) (t_i - t_{i - 1}) \\ 
+      &= \sum_{i = 1}^n [f(t^*_i) - f(\tilde t_i)] g'(\tilde t_i) (t_i - t_{i - 1}).
+    \end{align*}
+    
+    Note that 
+    \[
+      \left | \text{RHS} \right | \leq ||g'|| \sum_{i = 1}^n \operatorname{osc}(f, [t_{i - 1}, t_i]) (t_i - t_{i - 1}) \overset{\text{$f g'$ RI}}{\underset{||\Pi|| \to 0}{\longrightarrow}} 0. 
+    \]
+    
+    Hence 
+    \[
+      \lim_{||\Pi|| \to 0} S(f, g, \Pi) = \lim_{||\Pi|| \to 0} R(f g', \Pi) = \int_a^b f g'\ dx.
+    \]
+  \end{prf}
+  
+  \begin{thm}[BV condition]
+    Let $f, g \in [a, b] \to \mathbb R$ be such that 
+    \begin{enumerate}
+      \item $f$ is continuous and 
+      
+      \item $g$ is of bounded variation ($V(g, [a, b]) < \infty$).
+    \end{enumerate}
+    
+    Then $f \in RS(g, [a, b])$ and 
+    \[
+      \left | \int_a^b f\ dg \right | \leq ||f|| V(g, [a, b]).
+    \]
+  \end{thm}
+  
+  \newpage
+  
+  \begin{prf}
+    Let $\Pi = \left \{ t_i \right \}_{i = 0}^n$, $\tilde \Pi = \left \{ s_i \right \}_{j = 0}^m$ be unparked partitions of $[a, b]$.
+    Assume $\Pi \subseteq \tilde \Pi$ and the set $J_i = \left \{ j = 1, \dots, m : [s_{j - 1}, s_j] \subseteq [t_{i - 1}, t_i] \right \}$.
+    Now choose any marked points $t^*_i \in [t_{i - 1}, t_i]$ and $s^*_j \in [s_{j - 1}, s_j]$.
+    Then 
+    \begin{align*}
+      S(f, dg, \Pi) - S(f, dg, \tilde \Pi) &= \sum_{i = 1}^n f(t^*_i) (g(t_i) - g(t_{i - 1})) - \sum_{j = 1}^m f(s^*_i) [g(s_j) - g(s_{j - 1})] \\ 
+      &= \sum_{i = 1}^n \sum_{j \in J_i} [f(t^*_i) - f(s^*_j)] [g(s_j) - g(s_{j - 1})] \\ 
+      &\leq \sum_{i = 1}^n \sum_{j \in J_i} \operatorname{osc}(f, [t_{i - 1}, t_i]) \left | g(s_j) - g(s_{j - 1}) \right | \\ 
+      &\leq \sum_{i = 1}^n \operatorname{osc}(f, [t_{i - 1}, t_i]) V(g, [t_{i - 1}, t_i]).
+    \end{align*}
+    
+    If $f$ is continuous then $f$ is uniformly continuous.
+    Then 
+    \[
+      \forall \, \varepsilon > 0 \, \exists \, \delta > 0: ||\Pi|| < \delta \Rightarrow \operatorname{osc}(f, [t_{i - 1}, t_i]) < \varepsilon.
+    \]
+    Then $\left | \text{RHS} \right | \leq \varepsilon V(g, [a, b])$.
+    Then for any marked partitions $\Pi, \Pi'$ of $[a, b]$ we have 
+    \[
+      ||\Pi||, ||\Pi'|| < \delta \Rightarrow \left | S(f, dg, \Pi) - S(f, dg, \Pi') \right | \leq 2 \varepsilon V(g, [a, b]).
+    \]
+  \end{prf}
+  
+  \begin{thm}[Loéve-Young condition, 1936]
+    Let $f, g \colon [a, b] \to \mathbb R$ be such that 
+    \[
+      \exists \, \alpha, \beta \in (a, b]: \text{$f$ is $\alpha$-Hölder} \land \text{$g$ is $\beta$-Hölder} \land \alpha + \beta > 1.
+    \]
+    Then $f \in RS(g, [a, b])$.
+    
+    \begin{note}
+      $f$ is $\alpha$-Hölder if 
+      \[
+        \exists \, C > 0 \, \forall \, x, y \in [a, b]: \left | f(x) - f(y) \right | \leq C \left | x - y \right |^\alpha.
+      \]
+    \end{note}
+  \end{thm}
 \end{document}
