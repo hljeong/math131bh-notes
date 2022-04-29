@@ -1887,4 +1887,148 @@
       \]
     \end{note}
   \end{thm}
+  
+  \section{4.29 Friday Week 5}
+
+  {\boldmath \bfseries \underline{Wrapping up Stieljes integral}}
+
+  \begin{rmk}
+    \begin{itemize}
+      \item Stieljes integral includes sums: 
+      \[
+        F(x) = \sum_{i = 1}^n 1_{[x_i, \infty)} \text{ where } a < x_1 < x_2 < \cdots < x_n \leq b.
+      \]
+      Then for $g$ continuous: 
+      \[
+        \int_a^b g\ dF = \sum_{i = 1}^n g(x_i).
+      \]
+      We can combine these with the \textit{continuous part}: 
+      \[
+        F(x) = \sum_{i = 1}^n 1_{[x_i, \infty)}(x) + \int_a^x f(x)\ dt \Rightarrow \int_a^bb g\ dF = \sum_{i = 1}^r g(x_i) + \int_a^b g(t) f(t)\ dt.
+      \]
+      
+      \item Standard facts apply: 
+
+      \begin{lem}[Integration by parts]
+        If $f \in RS(g, [a, b])$ and $g \in RS(f, [a, b])$ then 
+        \[
+          \int_a^b f\ dg + \int_a^b g\ df = f g \Big |_a^b = f(b) g(b) - f(a) g(a).
+        \]
+      \end{lem}
+      
+      \begin{lem}[Substitution]
+        If $g \in RS(h, [a, b])$ and $G(x) := \int_a^x g\ dh$ then 
+        \[
+          f \in RS(G, [a, b]) \Leftrightarrow f g \in RS(h, [a, b])
+        \]
+        and if (both) true then 
+        \[
+          \int_a^b f\ dG = \int_a^b f g\ dh.
+        \]
+      \end{lem}
+      
+      \item The definition is unchanged if $f$ and $g$ are $\mathbb C$-valued.
+      This allows us to define {\boldmath \bfseries curve integrals} 
+      \[
+        \int_\gamma f(x)\ dz := \int_0^1 f(\gamma(t))\ d\gamma(t)
+      \]
+      where $\gamma \colon [0, 1] \to \mathbb C$ continuous.
+
+      This is independent of the parametrization.
+      
+      \item We can even generalize this to one of $f$ or $g$ being vector-valued and the other being scalar-valued.
+        
+      \item The length of a curve $\gamma \colon [a, b] \to X$ where $(X, \rho)$ is a metric space is given by 
+      \[
+        \operatorname{length}(\gamma) = \sup_{n \geq 1} \sup_{0 = t_0 < \cdots < t_n = 1} \sum_{i = 1}^n \rho(\gamma(t_{i - 1}), \gamma(t_i)).
+      \]
+      
+      A curve is {\boldmath \bfseries rectifiable} if the length is finite.
+      
+      If $X = \mathbb R^n$ or some other normed space then 
+      \[
+        \rho(\gamma(t_{i - 1}), \gamma(t_i)) = || \gamma(t_i) - \gamma(t_{i - 1}) ||.
+      \]
+      This allows us to think of $\operatorname{length}(\gamma)$ as 
+      \[
+        \int_0^1 1\ d||\gamma||.
+      \]
+      
+      If $\gamma$ is differentiable then 
+      \[
+        \gamma(t_i) - \gamma(t_{i - 1}) \approx \gamma'(t_{i - 1}) (t_i - t_{i - 1}).
+      \]
+      Then 
+      \[
+        \operatorname{length}(\gamma) = \int_0^1 || \gamma' ||(t)\ dt.
+      \]
+    \end{itemize}
+  \end{rmk}
+  
+  {\boldmath \bfseries \underline{Extensions of Riemann-Stieljes theory}}
+  
+  {\boldmath \bfseries Lebesgue integral:} The idea is that instead of partitioning the domain of a function, partition the range.
+  This requires developing a theory of measure of rather complicated sets.
+  
+  \begin{note}
+    $f$ is Lebesgue integrable $\Rightarrow$ $\left | f \right |$ is Lebesgue integrable.
+  \end{note}
+  
+  This is because Lebesgue integral mimics Darboux's approach.
+
+  FTC II does not hold.
+
+  The fix is given by: 
+  \begin{defn}
+    $f \colon [a, b] \to \mathbb R$ is said to be {\boldmath \bfseries Henstock-Kurzweil integrable} if 
+    \begin{align*}
+      \exists \, L \in \mathbb R \, &\forall \, \varepsilon > 0 \, \exists \, \delta \colon [a, b] \to (0, \infty) \, \forall \, \Pi = (\left \{ t_i \right \}_{i = 0}^n, \left \{ t^*_i \right \}_{i = 1}^n): \\ 
+      &\forall \, i = 1, \dots, n: \left | t_i - t_{i - 1} \right | < \delta(t^*_i) \Rightarrow \left | R(f, \Pi) - L \right | < \varepsilon
+    \end{align*}
+    where $\delta$ is called the {\boldmath \bfseries guage function}.
+  \end{defn}
+  
+  For bounded $f \colon [a, b] \to \mathbb R$, 
+  \[
+    f \text{ HK-integrable} \Leftrightarrow f \text{ measurable} \land f \text{ Lebesgue integrable}.
+  \]
+  
+  FTC holds: suppose $F \colon [a, b] \to \mathbb R$ is differentiable on $(a, b)$.
+  Then $F'$ is HK-integrable and 
+  \[
+    F(b) - F(a) = \int_a^b F(x)\ dx.
+  \]
+  
+  However note that this is restricted to the real line since it uses a partition.
+  
+  {\boldmath \bfseries \underline{Uniform convergence}}
+
+  {\boldmath \bfseries Q:} Let $\left \{ a_{n, m} \right \}_{n, m \in \mathbb N}$ be real such that 
+  \[
+    \forall \, m \in \mathbb N: b_m := \lim_{n \to \infty} a_{m, n} \text{ exists}
+  \]
+  and 
+  \[
+    \forall \, n \in \mathbb N: c_n := \lim_{m \to \infty} a_{m, n} \text{ exists.}
+  \]
+  
+  When is $\lim_{n \to \infty} c_n = \lim_{m \to \infty} b_m$?
+  
+  \newpage
+  
+  \begin{lem}
+    Suppose 
+    \[
+      \forall \, m \in \mathbb N\, \exists \, b_m \in \mathbb R: \lim_{n \to \infty} \sup_{n \in \mathbb N} \left | a_{m, n} - b_m \right | = 0, 
+    \]
+    or that $\lim_{m \to \infty} a_{m, n}$ is {\boldmath \bfseries uniform} in $n$.
+    Then 
+    \[
+      \forall \, n \in \mathbb N: c_n := \lim_{m \to \infty} a_{m, n} \text{ exists} \Rightarrow \lim_{m \to \infty} b_m \text{ and } \lim_{n \to \infty} c_n \text{ exist} \land \lim_{n \to \infty} c_n = \lim_{m \to \infty} b_m.
+    \]
+    This means 
+    \[
+      \lim_{n \to \infty} \lim_{m \to \infty} a_{m, n} = \lim_{m \to \infty} \lim_{n \to \infty} a_{m, n}.
+    \]
+  \end{lem}
 \end{document}
