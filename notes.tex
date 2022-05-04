@@ -1724,7 +1724,7 @@
   
   \begin{note}
     \begin{itemize}
-      \item Such an $L$ is unique (if it exists) and so we denote it $\int_a^f f(x)\ dg(x) = \int_a^b f\ dg$.
+      \item Such an $L$ is unique (if it exists) and so we denote it $\int_a^b f(x)\ dg(x) = \int_a^b f\ dg$.
 
       \item For $g(x) = x$, we get the Riemann integral.
         
@@ -1797,6 +1797,8 @@
     \end{align*}
   \end{defn}
   
+  \newpage
+  
   {\boldmath \bfseries \underline{Criteria for Stieljes integrability}}
   
   \begin{thm}[Reduction to Riemann integral]
@@ -1804,7 +1806,7 @@
     \begin{enumerate}
       \item $f$ is Riemann integrable and 
 
-      \item $g$ is cnotinuous on $[a, b]$, differentiable on $(a, b)$ with $g'$ Riemann integrable.
+      \item $g$ is continuous on $[a, b]$, differentiable on $(a, b)$ with $g'$ Riemann integrable.
     \end{enumerate}
     Then 
     \[
@@ -1818,7 +1820,7 @@
     Let $\tilde \Pi = (\left \{ t_i \right \}_{i = 0}^n, \left \{ \tilde t_i \right \}_{i = 1}^n)$.
     Then 
     \begin{align*}
-      S(f, dg, \Pi) - R(f g', \Pi') &= \sum_{i = 1}^n f(t^*_i) (g(t_i) - g(t_{i - 1})) - \sum_{i = 1}^n f(\tilde t_i) g(\tilde t_i) (t_i - t_{i - 1}) \\ 
+      S(f, dg, \Pi) - R(f g', \tilde \Pi) &= \sum_{i = 1}^n f(t^*_i) (g(t_i) - g(t_{i - 1})) - \sum_{i = 1}^n f(\tilde t_i) g(\tilde t_i) (t_i - t_{i - 1}) \\ 
       &= \sum_{i = 1}^n [f(t^*_i) - f(\tilde t_i)] g'(\tilde t_i) (t_i - t_{i - 1}).
     \end{align*}
     
@@ -1850,7 +1852,7 @@
   \newpage
   
   \begin{prf}
-    Let $\Pi = \left \{ t_i \right \}_{i = 0}^n$, $\tilde \Pi = \left \{ s_i \right \}_{j = 0}^m$ be unparked partitions of $[a, b]$.
+    Let $\Pi = \left \{ t_i \right \}_{i = 0}^n$, $\tilde \Pi = \left \{ s_i \right \}_{j = 0}^m$ be unmarked partitions of $[a, b]$.
     Assume $\Pi \subseteq \tilde \Pi$ and the set $J_i = \left \{ j = 1, \dots, m : [s_{j - 1}, s_j] \subseteq [t_{i - 1}, t_i] \right \}$.
     Now choose any marked points $t^*_i \in [t_{i - 1}, t_i]$ and $s^*_j \in [s_{j - 1}, s_j]$.
     Then 
@@ -1904,7 +1906,7 @@
       \]
       We can combine these with the \textit{continuous part}: 
       \[
-        F(x) = \sum_{i = 1}^n 1_{[x_i, \infty)}(x) + \int_a^x f(x)\ dt \Rightarrow \int_a^bb g\ dF = \sum_{i = 1}^r g(x_i) + \int_a^b g(t) f(t)\ dt.
+        F(x) = \sum_{i = 1}^n 1_{[x_i, \infty)}(x) + \int_a^x f(x)\ dt \Rightarrow \int_a^b g\ dF = \sum_{i = 1}^r g(x_i) + \int_a^b g(t) f(t)\ dt.
       \]
       
       \item Standard facts apply: 
@@ -2031,4 +2033,157 @@
       \lim_{n \to \infty} \lim_{m \to \infty} a_{m, n} = \lim_{m \to \infty} \lim_{n \to \infty} a_{m, n}.
     \]
   \end{lem}
+  
+  \section{5.2 Monday Week 6}
+  
+  \section{5.4 Wednesday Week 6}
+  
+  {\boldmath \bfseries \underline{Uniform convergence}}
+  
+  {\boldmath \bfseries Last time:} $f_n \to f$ uniformly on $A := \lim_{n \to \infty} \sup_{x \in A} \rho(f_n(x), f(x)) = 0$.
+  
+  \begin{defn}
+    A sequence of functions $\left \{ f_n \right \}_{n \in \mathbb N}$ where $f_n \colon A \to X$ is {\boldmath \bfseries uniformly Cauchy} if 
+    \[
+      \lim_{N \to \infty} \sup_{n, m \geq N} \underbrace{\sup_{x \in A} \rho(f_n(x), f_m(x))}_{\substack{\text{metric on space of functions $A \to X$,} \\ \text{assuming supremum finite}}}.
+    \]
+  \end{defn}
+  
+  \begin{lem}
+    Let $f_n, f \colon A \to X$ where $(X, \rho)$ is a metric space.
+    Then
+    \begin{enumerate}
+      \item $f_n \to f$ uniformly $\Rightarrow$ $\left \{ f_n \right \}_{n \in \mathbb N}$ is uniformly Cauchy and 
+
+      \item if $(X, \rho)$ is complete then also 
+      \[
+        \left \{ f_n \right \} \text{ uniformly Cauchy} \Rightarrow \exists \, f \colon A \to X: f_n \to f \text{ uniformly}.
+      \]
+    \end{enumerate}
+  \end{lem}
+  
+  \begin{prf}
+    \begin{enumerate}
+      \item Note that 
+      \[
+        \rho(f_n(x), f_m(x)) \leq \rho(f_n(x), f(x)) + \rho(f_m(x), f(x)).
+      \]
+      Then 
+      \[
+        \sup_{n, m \geq N} \sup_{x \in A} \rho(f_n(x), f_m(x)) \leq 2 \sup_{n \geq N} \sup_{x \in A} \rho(f_n(x), f(x)) \underset{n \to \infty}{\longrightarrow} \limsup_{n \to \infty} \sup_{x \in A} \rho(f_n(x), f(x)) \overset{f_n \to f \text{ uniformly}}{=\joinrel=\joinrel=\joinrel=\joinrel=\joinrel=\joinrel=\joinrel=\joinrel=\joinrel=} 0.
+      \]
+      
+      \item Assume $\left \{ f_n \right \}_{n \in \mathbb N}$ uniformly Cauchy.
+      Then $\forall \, x \in X: \left \{ f_n(x) \right \}_{n \in \mathbb N}$ is Cauchy in $(X, \rho)$.
+      Then 
+      \[
+        (X, \rho) \text{ complete} \Rightarrow f(x) := \lim_{n \to \infty} f_n(x) \text{ exists } \forall \, x \in X.
+      \]
+      Then $f_n \to f$ pointwise.
+      
+      Note that 
+      \[
+        \rho(f_n(x), f(x)) = \lim_{m \to \infty} \rho(f_n(x), f_m(x)) \leq \sup_{m \geq n} \rho(f_n(x), f_m(x)).
+      \]
+      Then 
+      \[
+        \sup_{x \in A} \rho(f_n(x), f(x)) \leq \sup_{m \geq n} \sup_{x \in A} \rho(f_n(x), f_m(x)).
+      \]
+      Then 
+      \[
+        \limsup_{n \to \infty} \sup_{x \in A} \rho(f_n(x), f(x)) \leq \lim_{N \to \infty} \sup_{m, n \geq N} \sup_{x \in A} \rho(f_n(x), f_m(x)) \overset{\left \{ f_n \right \} \text{ uniformly Cauchy}}{=\joinrel=\joinrel=\joinrel=\joinrel=\joinrel=\joinrel=\joinrel=\joinrel=\joinrel=\joinrel=\joinrel=\joinrel=\joinrel=\joinrel=} 0.
+      \]
+    \end{enumerate}
+  \end{prf}
+  
+  \begin{thm}
+    Let $a < b$ be reals and $f_n \colon (a, b) \to \mathbb R$ where $n \in \mathbb N$ be differentiable functions.
+    Assume 
+    \begin{enumerate}
+      \item $\exists \, x_0 \in (a, b): \lim_{n \to \infty} f_n(x_0) \text{ exists}$ and 
+        
+      \item $\left \{ f_n' \right \}_{n \in \mathbb N}$ is uniformly Cauchy.
+    \end{enumerate}
+    Then there exists $f \colon (a, b) \to \mathbb R$ differentiable such that 
+    \[
+      f_n \to f \text{ uniformly} \quad \land \quad f_n' \to f' \text{ uniformly.}
+    \]
+  \end{thm}
+  
+  \begin{prf}
+    For all $n \in \mathbb N$, let $\phi_n \colon (a, b) \times (a, b) \to \mathbb R$ be defined by 
+    \[
+      \phi_n(x, y) := \begin{cases}
+        \frac{f_n(y) - f_n(x)}{y - x} & x \neq y \\ 
+        f_n'(x) & x = y.
+      \end{cases}
+    \]
+    Note that $\phi_n$ is continuous.
+    
+    We then show that $\left \{ \phi_n \right \}$ is uniformly Cauchy.
+    Note that 
+    \[
+      \phi_n(x, y) - \phi_m(x, y) \overset{x \neq y}{=\joinrel=\joinrel=\joinrel=\joinrel=} \frac{(f_n - f_m(x))(y) - (f_n - f(m))(x)}{y - x} \overset{\text{MVT}}{=\joinrel=\joinrel=\joinrel=\joinrel=} (f_n' - f_m')(\xi).
+    \]
+
+    Then 
+    \[
+      \sup_{x, y \in (a, b)} \left | \phi_n(x, y) - \phi_m(x, y) \right | \leq \sup_{x \in (a, b)} \left | f_n'(x) - f_m'(x) \right |.
+    \]
+    Since $\mathbb R$ is complete in $\left | \cdot \right |$-norm, Lemma~\ref{lem:18.2} implies that there exists $\phi \colon (a, b) \times (a, b) \to \mathbb R$ such that $\phi_n \to \phi$ uniformly on $(a, b) \times (a, b)$.
+
+    Then 
+    \[
+      f_n(x) = f_n(x_0) + (x - x_0) \phi_n(x, x_0).
+    \]
+    Then $f(x) = \lim_{n \to \infty} f_n(x)$ exists for all $x \in (a, b)$ and obeys 
+    \[
+      f(x) = f(x_0) + (x - x_0) \phi(x, x_0).
+    \]
+    The limit $f_n \to f$ is uniform because $\phi_n \to \phi$ is.
+
+    Finally, 
+    \[
+      \lim_{y \to x} \frac{f(y) - f(x)}{y - x} = \lim_{y \to x} \lim_{n \to \infty} \phi_n(x, y) \overset{\phi_n \to \phi \text{ uniformly}}{=\joinrel=\joinrel=\joinrel=\joinrel=\joinrel=\joinrel=\joinrel=\joinrel=\joinrel=\joinrel=} \lim_{n \to \infty} \lim_{y \to x} \phi_n(x, y) = \lim_{n \to \infty} f_n'(x).
+    \]
+    Then $f'(x)$ exists and $f'(x) = \lim_{n \to \infty} f_n'(x) = \phi(x, x)$.
+    Then, since $\phi_n \to \phi$ uniformly, $f_n' \to f'$ uniformly.
+  \end{prf}
+  
+  {\boldmath \bfseries \underline{Applications}}
+
+  \begin{lem}
+    Let $f(x) := \sum_{n = 0}^\infty a_n (x - x_0)^n$ for $x \in (x_0 - R, x_0 + R)$ where $R := (\limsup_{n \to \infty} \left | a_n \right |^{1 / n})^{-1}$ is the radius of convergence.
+    
+    Then $f$ is differentiable on $(x_0 - R, x_0 + R)$ and 
+    \[
+      \forall \, x \in (x_0 - R, x_0 + R): f'(x) = \sum_{n = 1}^\infty n a_n (x - x_0)^{n - 1}
+    \]
+    where the series has radius of convergence $R$.
+  \end{lem}
+  
+  \begin{prf}
+    Note that 
+    \[
+      \limsup_{n \to \infty} \left | n a_n \right |^{1 / (n - 1)} = \limsup_{n \to \infty} \left | a_n \right |^{1 / n}.
+    \]
+    Then both series have the same radius of convergence.
+    Hence 
+    \[
+      f_N(x) = \sum_{k = 0}^N a_k (x - x_0)^k \quad \land \quad f_N'(x) = \sum_{k = 1}^N k a_k (x - x_0)^{k - 1}.
+    \]
+    Then the family $\left \{ f_n' \right \}$ is uniformly Cauchy on any closed subinterval of $(x_0 - R, x_0 + R)$.
+    
+    Since $f_N(x_0) = a_0$, Theorem~\ref{rhm:18.3} tells us that 
+    \[
+      f_N(x) \to \sum_{k = 0}^\infty a_k (x - x_0)^k =: f, 
+    \]
+    \[
+      f_N'(x) \to \sum_{k = 1}^\infty k a_k (x - x_0)^{k - 1}, 
+    \]
+    and 
+    \[
+      f' = \sum_{k = 1}^\infty k a_k (x - x_0)^{k - 1}.
+    \]
+  \end{prf}
 \end{document}
