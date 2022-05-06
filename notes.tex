@@ -2174,7 +2174,7 @@
     \]
     Then the family $\left \{ f_n' \right \}$ is uniformly Cauchy on any closed subinterval of $(x_0 - R, x_0 + R)$.
     
-    Since $f_N(x_0) = a_0$, Theorem~\ref{rhm:18.3} tells us that 
+    Since $f_N(x_0) = a_0$, Theorem~\ref{thm:18.3} tells us that 
     \[
       f_N(x) \to \sum_{k = 0}^\infty a_k (x - x_0)^k =: f, 
     \]
@@ -2186,4 +2186,186 @@
       f' = \sum_{k = 1}^\infty k a_k (x - x_0)^{k - 1}.
     \]
   \end{prf}
+  
+  \newpage
+  
+  \section{5.6 Friday Week 6}
+  
+  {\boldmath \bfseries \underline{Uniform convergence}}
+
+  {\boldmath \bfseries Last time:} 
+  \begin{itemize}
+    \item The derivative commutes with uniform convergence (of derivatives).
+      
+    \item Power series are $\infty$-differentiable on interval of locally uniform convergence.
+  \end{itemize}
+  
+  \begin{lem}
+    The power series
+    \begin{align*}
+      e^x &:= \sum_{n = 0}^\infty \frac{x^n}{n!} \\ 
+      \sin x &:= \sum_{n = 0}^\infty (-1)^n \frac{x^{2 n + 1}}{(2 n + 1)!} \\ 
+      \cos x &:= \sum_{n = 1}^\infty (-1)^n \frac{x^{2 n}}{(2 n)!}
+    \end{align*}
+    have radius of convergence $R = \infty$ and so they converge on all of $\mathbb R$ and uniformly on compact subsets thereof.
+  \end{lem}
+  
+  \begin{prf}
+    Note that 
+    \[
+      n! \underset{\forall \, k < n}{\geq} k^{n - k}.
+    \]
+    Then 
+    \[
+      \left ( \frac{1}{n!} \right )^{1 / n} \leq \left ( \frac{1}{k} \right )^{(n - k) / n} \underset{k \leq n / 2}{\leq} \left ( \frac{1}{k} \right )^{1 / 2}.
+    \]
+    Then 
+    \[
+      \limsup \left ( \frac{1}{n!} \right )^{1 / n} \underset{\forall \, k \geq 1}{\leq} \frac{1}{\sqrt k} \underset{k \to \infty}{\longrightarrow} 0.
+    \]
+    Then 
+    \[
+      R = \left ( \limsup_{n \to \infty} \left ( \frac{1}{n!} \right )^{1 / n} \right )^{-1} = \infty.
+    \]
+  \end{prf}
+  
+  \begin{lem}
+    \begin{itemize}
+      \item $\frac{d}{dx} e^x = e^x$, 
+        
+      \item $\frac{d}{dx} \sin x = \cos x$, and 
+
+      \item $\frac{d}{dx} \cos x = -\sin x$.
+    \end{itemize}
+  \end{lem}
+  
+  \begin{prf}
+    \begin{align*}
+      \frac{d}{dx} \sum_{n = 0}^\infty \frac{x^n}{n!} &= \sum_{n = 1}^\infty \frac{n x^{n - 1}}{n!} \\ 
+      &= \sum_{n = 1}^\infty \frac{x^{n - 1}}{(n - 1)!} = e^x.
+    \end{align*}
+    
+    \begin{align*}
+      \frac{d}{dx} \cos(x) &= \sum_{n = 1}^\infty (-1)^n \frac{2 n x^{2 n - 1}}{(2 n)!} \\ 
+      &= \sum_{n = 1}^\infty (-1)^n \frac{x^{2 n - 1}}{(2 n - 1)!} \\ 
+      &\underset{m = n - 1}{=} \sum_{m = 0}^\infty (-1)^{m + 1} \frac{x^{2 m + 1}}{(2 m + 1)!} \\ 
+      &= -\sin x.
+    \end{align*}
+  \end{prf}
+  
+  Why writing $e^x$?
+
+  \begin{lem}
+    For all $x, y \in \mathbb R$ we have 
+    \[
+      e^{x + y} = e^x e^y.
+    \]
+  \end{lem}
+  
+  \begin{lem}
+    Let $f \colon \mathbb R \to \mathbb R$ be continuous and such that 
+    \[
+      \forall \, x, y \in \mathbb R: f(x + y) = f(x) f(y).
+    \]
+    Then either
+    \[
+      \forall \, x \in \mathbb R: f(x) = 0
+    \]
+    or 
+    \[
+      \exists \, c \forall \, x \in \mathbb R: f(x) = e^{c x}.
+    \]
+  \end{lem}
+  
+  \newpage
+  
+  \begin{lem}
+    \begin{enumerate}
+      \item For all $x \in R$ we have
+      \[
+        \sin^2 x + \cos^2 x = 1 \quad \land \sin x, \cos x \in [-1, 1].
+      \]
+
+      \item For all $x, y \in \mathbb R$ we have 
+      \begin{align*}
+        \sin(x + y) &= \sin x \cos y + \cos x \sin y \\ 
+        \cos(x + y) &= \cos x \cos y - \sin x \sin y.
+      \end{align*}
+      
+      \item Set $\pi := 2 \inf \left \{ t \geq 0 : \cos(t) = 0 \right \}$.
+      Then for all $x \in \mathbb R$ we have 
+      \[
+        \sin x = -\cos \left ( x + \frac{\pi}{2} \right ) = -\sin(x + \pi)
+      \]
+      and so 
+      \[
+        \sin(x + 2 \pi) = \sin x \quad \land \quad \cos(x + 2 \pi) = \cos(x).
+      \]
+    \end{enumerate}
+  \end{lem}
+  
+  {\boldmath \bfseries \underline{Singular functions}}
+  
+  Let 
+  \[
+    h(x) := \begin{cases}
+      \frac{x^2}{1 + x^2} \sin(1 / x) & x \neq 0 \\ 
+      0 & x = 0.
+    \end{cases}
+  \]
+  Note that 
+  \[
+    h'(x) = \begin{cases}
+      -\frac{1}{1 + x^2} \cos(1 / x) - \frac{2 x}{(1 + x^2)^2} \sin(1 / x) & x \neq 0 \\ 
+      0 & x = 0.
+    \end{cases}
+  \]
+  
+  Let $\left \{ q_n \right \}_{n \in \mathbb N}$ enumerate $\mathbb Q$.
+  Set 
+  \[
+    f(x) = \sum_{n = 0}^\infty 2^{-n} h(x - q_n).
+  \]
+  Then, since $||h||, ||h'|| < \infty$, we can differentiate term-by-term and so 
+  \[
+    f'(x) \sum_{n = 0}^\infty 2^{-n} h'(x - q_n).
+  \]
+  Then $f'$ is discontinuous on $\mathbb Q$ and continuous on $\mathbb R \setminus \mathbb Q$.
+  
+  {\boldmath \bfseries \underline{The space $C(X)$, etc.}}
+  
+  \begin{defn}
+    Let $(X, \rho)$ be a metric space.
+    Set 
+    \begin{align*}
+      C(X) &:= \big \{ \overbrace{f \colon X \to \mathbb R}^{f \in \mathbb R^X} : \text{continuous} \big \} \\ 
+      C_b(X) &:= \left \{ f \colon X \to \mathbb R : \text{continuous} \land \text{bounded} \right \} \\ 
+      ||f|| &:= \sup_{x \in X} | f(x) |.
+    \end{align*}
+  \end{defn}
+  
+  \begin{lem}
+    \begin{itemize}
+      \item $C(X)$ and $C_b(X)$ are linear vector spaces with respect to 
+      \[
+        (\lambda f)(x) = \lambda f(x) \quad \land \quad (f + g)(x) := f(x) + g(x).
+      \]
+      
+      \item $|| \cdot ||$ is a norm on $C_b(X)$.
+    \end{itemize}
+  \end{lem}
+  
+  \begin{lem}
+    $(C_b(X), || \cdot ||\text{-metric})$ is complete.
+  \end{lem}
+  
+  \begin{prf}
+    Note that $(\mathbb R, | \cdot |)$ is complete.
+    
+    Also note that from last time we know that 
+    \[
+      \text{uniformly Cauchy on such spaces} \Rightarrow \text{uniformly convergent}.
+    \]
+  \end{prf}
+
 \end{document}
